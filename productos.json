@@ -1,0 +1,552 @@
+[
+  {
+    "id": 1,
+    "nombre": "Xbox 360",
+    "descripcion": "Legendaria consola de Microsoft con Wi-Fi integrado, disco duro de alta capacidad y acceso a un catálogo clásico de juegos icónicos como Halo y Gears of War.",
+    "categoria": "Consolas",
+    "precio": 499.99,
+    "disenos": [
+      { "nombre": "Edición Standard", "imagen": "https://tse3.mm.bing.net/th/id/OIP.-Nif52OIJlWMhNd57w5enAHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Star Wars", "imagen": "https://th.bing.com/th/id/R.ad222ec8ea4473670bcd809275ce0b61?rik=k3i8S8qtWarS5Q&pid=ImgRaw&r=0" }
+    ]
+  },
+  {
+    "id": 2,
+    "nombre": "Playstation 1",
+    "descripcion": "La PS1 original de Sony en buen estado y funcionando perfecto. Compatible con todos los clásicos: Crash Bandicoot, Tekken 3, Metal Gear Solid, Resident Evil, Gran Turismo y más.Incluye consola, control original y cables. Ideal para coleccionistas y amantes de lo retro.",
+    "categoria": "Consolas",
+    "precio": 2700.00,
+    "disenos": [
+      { "nombre": "Edición Standard", "imagen": "https://gmedia.playstation.com/is/image/SIEPDC/30th-anniversary-ps1-timeline-image-block-01-en-11oct24?$facebook$" },
+      { "nombre": "Edición Azul", "imagen": "https://tse2.mm.bing.net/th/id/OIP.fKKf7-KEvDYJwFlI8fRhmAHaFQ?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 3,
+    "nombre": "Playstation 2",
+    "descripcion": "La consola más vendida de la historia, con catálogo legendario: GTA San Andreas, God of War, Need for Speed, FIFA, Resident Evil y cientos más.Incluye consola, control original, cables y memoria. Lee discos sin problema, funciona al 100%.",
+    "precio": 119.50,
+    "disenos": [
+      { "nombre": "Edición Standard", "imagen": "https://th.bing.com/th/id/OIP.sPONLwjlg1VAVqJXxkIPQwHaD4?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Roja", "imagen": "https://tse3.mm.bing.net/th/id/OIP.7LD9qQVvpGa2Lk6hy9sO0gHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 4,
+    "nombre": "Playstation 3",
+    "descripcion": "Consola potente con gráficos HD, lector Blu-ray y catálogo increíble: The Last of Us, GTA V, God of War 3, Uncharted, Call of Duty y más.",
+    "categoria": "Consolas",
+    "precio": 4000.00,
+    "disenos": [
+      { "nombre": "Edición Standard", "imagen": "https://th.bing.com/th/id/OIP.p5uJfIgKxE9njZQpU2ma3wAAAA?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Dorada", "imagen": "https://th.bing.com/th/id/OIP.9uQKZfSe2kfBI70pNTfIKgHaFE?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 5,
+    "nombre": "Playstation 4",
+    "descripcion": "Consola potente con gráficos HD, lector Blu-ray y catálogo increíble: The Last of Us, GTA V, God of War 3, Uncharted, Call of Duty y más.",
+    "categoria": "Consolas",
+    "precio": 5000.00,
+    "disenos": [
+      { "nombre": "Edición Standard", "imagen": "https://th.bing.com/th/id/OIP.maD3MljYUYBvhM2KB2dVbQHaHa?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Luxury lab", "imagen": "https://tse3.mm.bing.net/th/id/OIP.aUvu15g4BRJRzgKV19fTdwHaFB?r=0&w=2048&h=1387&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+    {
+    "id": 6,
+    "nombre": "Playstation 5",
+    "descripcion": "Consola de videojuegos con pantalla OLED de alta resolución y sistema de juego potente.",
+    "categoria": "Consolas",
+    "precio": 11199.99,
+    "disenos": [
+      { "nombre": "Edición Standard", "imagen": "https://th.bing.com/th/id/OIP.JIYHd1xS_DHaoKuphMRdPAHaHa?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Spiderman", "imagen": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6554/6554392_sd.jpg" }
+    ]
+  },
+  {
+    "id": 7,
+    "nombre": "Xbox Series X",
+    "descripcion": "Consola de videojuegos con sistema de juego potente y gráficos de alta calidad.",
+    "categoria": "Consolas",
+    "precio": 15000.00,
+    "disenos": [
+      { "nombre": "Edición Negra", "imagen": "https://press-start.com.au/wp-content/uploads/2019/12/xbox-series-xxx.jpg" },
+      { "nombre": "Edición Blanca", "imagen": "https://i5.walmartimages.com/seo/Microsoft-Xbox-Series-X-1TB-Digital-Edition_92e06221-6348-40bc-b83b-31c508acd19c.0d3f7d474076f59b65b5276264c2b029.jpeg" }
+    ]
+  },
+  {
+    "id": 8,
+    "nombre": "Nintendo Switch OLED",
+    "descripcion": "Consola híbrida con pantalla OLED de 7 pulgadas, almacenamiento ampliable y soporte ajustable para juego en mesa.",
+    "categoria": "Consolas",
+    "precio": 7500.00,
+    "disenos": [
+      { "nombre": "Edición Blanco", "imagen": "https://tse2.mm.bing.net/th/id/OIP.ubWOKmsTft1zAR8uxHRoCgHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Zelda", "imagen": "https://assets.nintendo.eu/image/upload/f_auto,c_limit,w_1920,q_75/MNS/NOE/000000000010009866/1.1_ProductGallery_Switch_NintendoSwitchOLEDTLoZTearsOfTheKingdom_Docked_enNOE" }
+    ]
+  },
+  {
+    "id": 9,
+    "nombre": "Nintendo Switch Lite",
+    "descripcion": "Versión compacta y ligera, ideal para modo portátil. Pantalla táctil de 5.5 pulgadas, batería de larga duración y diseño súper cómodo.",
+    "categoria": "Consolas",
+    "precio": 3500.00,
+    "disenos": [
+      { "nombre": "Edición Azul", "imagen": "https://th.bing.com/th/id/OIP.WQdUSCvqiEiUq-m_vsevwgHaER?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Amarilla", "imagen": "https://spacegamer.com.ar/img/Public/1058-producto-10002291-1-nswitchlitehwcoral-h2x1-5567.jpg" }
+    ]
+  },
+  {
+    "id": 10,
+    "nombre": "Nintendo Switch 2",
+    "descripcion": "Pantalla más grande y fluida, mayor potencia, retrocompatible con juegos de Switch y nuevos exclusivos. Joy-Con magnéticos mejorados y dock con salida 4K.",
+    "categoria": "Consolas",
+    "precio": 14500.00,
+    "disenos": [
+      { "nombre": "Edición Estandar", "imagen": "https://th.bing.com/th/id/OIP.QAKymzv02oyX6En7-NWrRgHaD1?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Zelda edition", "imagen": "https://www.nintendoreporters.com/storage/files/nintendo-switch-2-zelda-40th-anniversary-edition-revealed-releases-october-29-2026.jpeg" }
+    ]
+  },
+  {
+    "id": 11,
+    "nombre": "Meta quest 3",
+    "descripcion": "Diseño compacto con 1TB SSD de alta velocidad y rendimiento 4K a 60 FPS sin lector de disco.",
+    "categoria": "Consolas",
+    "precio": 12000.99,
+    "disenos": [
+      { "nombre": "Edición Estandar", "imagen": "https://lookaside.fbsbx.com/elementpath/media/?media_id=157327897433582&version=1747052537&transcode_extension=webp" },
+      { "nombre": "Edición Negra", "imagen": "https://tse1.mm.bing.net/th/id/OIP.gR0d14Rg6EXHk0M0o_wbugHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 12,
+    "nombre": "Meta quest 2",
+    "descripcion": "Gafas de realidad virtual autónomas con pantallas 4K por ojo, tracking de manos y lentes Pancake.",
+    "categoria": "Consolas",
+    "precio": 5000.00,
+    "disenos": [
+      { "nombre": "Edición White VR", "imagen": "https://tse2.mm.bing.net/th/id/OIP.BJzsaQ4couADTqj45vYevAHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición misma", "imagen": "https://th.bing.com/th/id/R.1257f9efcf59a4483ebc48a81f7a09f5?rik=71AkxmrELZjFQA&pid=ImgRaw&r=0" }
+    ]
+  },
+  {
+    "id": 13,
+    "nombre": "Teclado Mecánico RGB Gamer",
+    "descripcion": "Teclado mecánico con retroiluminación RGB y switches de alta calidad para una experiencia de juego inmersiva.",
+    "categoria": "Periféricos RGB",
+    "precio": 1500.99,
+    "disenos": [
+      { "nombre": "Edición RGB", "imagen": "https://http2.mlstatic.com/D_NQ_NP_605793-MLA84549859328_052025-F.webp%C2%BF%C2%BFhttps://www.mercadolibre.com.mx/teclado-gamer-gigante-redragon-alien-k605-rgb-teclado-negro-idioma-ingles-us/p/MLM34248184%C2%BF%C2%BFhttps://http2.mlstatic.com/D_NQ_NP_605793-MLA84549859328_052025-F.jpg,https://http2.mlstatic.com/D_NQ_NP_779632-MLA84549859340_052025-F.jpg,https://http2.mlstatic.com/D_NQ_NP_852988-MLA84549772470_052025-F.jpg,https://http2.mlstatic.com/D_NQ_NP_777419-MLA84549742722_052025-F.jpg,https://http2.mlstatic.com/D_NQ_NP_693265-MLA84549772502_052025-F.jpg,https://http2.mlstatic.com/D_NQ_NP_748046-MLA84549772522_052025-F.jpg,https://http2.mlstatic.com/D_NQ_NP_912617-MLA84549742764_052025-F.jpg,https://http2.mlstatic.com/D_NQ_NP_980610-MLA84848081881_052025-F.jpg" },
+      { "nombre": "Edición Morado", "imagen": "https://m.media-amazon.com/images/I/61gK8XUMtNL._AC_.jpg" }
+    ]
+  },
+  {
+    "id": 14,
+    "nombre": "Ratón o mouse",
+    "descripcion": "Sensor de alta precisión, respuesta rápida y diseño ergonómico ideal para largas horas de uso. Perfecto para trabajar, estudiar o jugar.",
+    "categoria": "Periféricos RGB",
+    "precio": 500.00,
+    "disenos": [
+      { "nombre": "Edición Negra", "imagen": "https://th.bing.com/th/id/OIP.Ds9Gb1c5qtUEL2wF3cVJvQHaHb?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Blanca", "imagen": "https://tse1.mm.bing.net/th/id/OIP.oumixK5lXay0Z74M_GBMLAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 15,
+    "nombre": "Teclado sensillo",
+    "descripcion": "Teclado sensible y responsive para uso diario.",
+    "categoria": "Periféricos RGB",
+    "precio": 500.99,
+    "disenos": [
+      { "nombre": "Edición Cyber Yellow", "imagen": "https://m.media-amazon.com/images/I/61kaThSdrNL._AC_SL1500_.jpg" },
+      { "nombre": "Edición Stealth Black", "imagen": "https://media.s-bol.com/Pk4Wy7WylzRA/nZ7E1Q4/550x320.jpg" }
+    ]
+  },
+  {
+    "id": 16,
+    "nombre": "Mouse Ultralight Wireless 59g",
+    "descripcion": "Ratón competitivo inalámbrico con estructura perforada, sensor de 26,000 DPI y patas de PTFE.",
+    "categoria": "Periféricos RGB",
+    "precio": 69.99,
+    "disenos": [
+      { "nombre": "Edición Pure White", "imagen": "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=800" },
+      { "nombre": "Edición Matte Black", "imagen": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800" }
+    ]
+  },
+  {
+    "id": 17,
+    "nombre": "Micrófono Razer",
+    "descripcion": "Micrófono de condensador USB con brazo articulado, filtro pop y control de ganancia para streaming y grabación profesional.",
+    "categoria": "Periféricos RGB",
+    "precio": 1000.50,
+    "disenos": [
+      { "nombre": "Edición Negra", "imagen": "https://tse3.mm.bing.net/th/id/OIP.A9fJcLu1EctyEKoabucpygHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Blanca", "imagen": "https://th.bing.com/th/id/OIP.WM7rWgT0DUk8s6tCakAL8wHaFP?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 18,
+    "nombre": "Escaner",
+    "descripcion": "Escaneo nítido de alta resolución, ideal para documentos, fotos e identificaciones. Conexión USB, compatible con PC y Mac, fácil de instalar.",
+    "categoria": "Periféricos RGB",
+    "precio": 1200.00,
+    "disenos": [
+      { "nombre": "Edición Estandar", "imagen": "https://tse3.mm.bing.net/th/id/OIP.7SphB44d2oThL5ytANEA-gHaEd?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Mediana", "imagen": "https://tse2.mm.bing.net/th/id/OIP.xwGBiK71tpmuT0UVVoUshAHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 19,
+    "nombre": "Cámara Webcam 2K HDR 60FPS",
+    "descripcion": "Cámara para creadores de contenido con enfoque automático rápido, tapa de privacidad y micrófono estéreo.",
+    "categoria": "Periféricos RGB",
+    "precio": 1700.00,
+    "disenos": [
+      { "nombre": "Edición Streamer Black", "imagen": "https://http2.mlstatic.com/D_NQ_NP_622456-MLU78022260137_072024-O.webp" },
+      { "nombre": "Edición Ice White", "imagen": "https://tse4.mm.bing.net/th/id/OIP.bNh5WiY8nzl-9n8Zbi4gTQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 20,
+    "nombre": "Mando Arcade FightStick Pro",
+    "descripcion": "Controlador especial para juegos de pelea con palanca Sanwa Denshi y botones de respuesta inmediata.",
+    "categoria": "Periféricos RGB",
+    "precio": 3200.99,
+    "disenos": [
+      { "nombre": "Edición Negra", "imagen": "https://tse3.mm.bing.net/th/id/OIP.l7fl-Na5Pp-9loJnCoyTqgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Retro Custom", "imagen": "https://tse1.mm.bing.net/th/id/OIP.76qcapQVataHR_NFjfMuOQHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 21,
+    "nombre": "Silla Gamer Tela Transpirable",
+    "descripcion": "Silla ergonómica tapizada en malla de tela fresca, reposabrazos 3D y pistón de gas Clase 4.",
+    "categoria": "Sillas & Setup",
+    "precio": 4380.00,
+    "disenos": [
+      { "nombre": "Edición Charcoal Grey", "imagen": "https://tse3.mm.bing.net/th/id/OIP.8kZU-wujZzYMmKSbyBKvgAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Arctic Blue", "imagen": "https://tse4.mm.bing.net/th/id/OIP.Cwa79ydweuRJavI79IrKeQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 22,
+    "nombre": "Escritorio Gamer Motorizado Pro",
+    "descripcion": "Mesa de altura regulable electrónicamente con tablero efecto fibra de carbono y portavasos.",
+    "categoria": "Sillas & Setup",
+    "precio": 6600.99,
+    "disenos": [
+      { "nombre": "Edición Carbon Black", "imagen": "https://http2.mlstatic.com/D_NQ_NP_721021-MLU85599210221_062025-O.webp" },
+      { "nombre": "Edición Pure Studio White", "imagen": "https://tse1.mm.bing.net/th/id/OIP.n71OAYwOViMJOoDaYYe8NwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 23,
+    "nombre": "Brazo Doble Monitor a Gas",
+    "descripcion": "Soporte articulado para 2 pantallas de hasta 32 pulgadas con organizador de cables interno.",
+    "categoria": "Sillas & Setup",
+    "precio": 1300.99,
+    "disenos": [
+      { "nombre": "Edición Matte Black", "imagen": "https://http2.mlstatic.com/D_NQ_NP_710419-MLA99509053844_112025-O.webp" },
+      { "nombre": "Edición Silver Metal", "imagen": "https://tse3.mm.bing.net/th/id/OIP.BqGhmBn33mL8D-Y81w9_kgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 24,
+    "nombre": "Barras de Luz RGB Ambientales",
+    "descripcion": "Pack de 2 torres de iluminación LED inteligentes sincronizables con la música o pantalla del PC.",
+    "categoria": "Sillas & Setup",
+    "precio": 900.00,
+    "disenos": [
+      { "nombre": "Edición RGB Gradient", "imagen": "https://tse3.mm.bing.net/th/id/OIP.utaDAjOrw_KpSt6dLvUh-gHaIG?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Cyber neon", "imagen": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/f0ffca30-df2b-44c7-99f4-5b977112abb8.__CR0,0,970,600_PT0_SX970_V1___.jpg" }
+    ]
+  },
+  {
+    "id": 25,
+    "nombre": "Panel Acústico Hexagonal RGB",
+    "descripcion": "Set de 8 paneles de absorción de eco decorativos con retroiluminación inteligente modular.",
+    "categoria": "Sillas & Setup",
+    "precio": 1998.00,
+    "disenos": [
+      { "nombre": "Edición Black Hex", "imagen": "https://media.adeo.com/mkp/8a79a89ad0f1fc5054f149d3df56f09b/media.jpg?width=650&height=650&format=jpg&quality=80&fit=bounds" },
+      { "nombre": "Edición White Hex", "imagen": "https://media.adeo.com/mkp/18376253cff5a26234902ac8000dc18b/media.jpg?width=3000&height=3000&format=jpg&quality=80&fit=bounds" }
+    ]
+  },
+  {
+    "id": 26,
+    "nombre": "Soporte de Auriculares con Hub USB",
+    "descripcion": "Stand vertical con base pesada, iluminación RGB personalizable y 3 puertos USB 3.0 passthrough.",
+    "categoria": "Sillas & Setup",
+    "precio": 500.00,
+    "disenos": [
+      { "nombre": "Edición Black Hub", "imagen": "https://tse3.mm.bing.net/th/id/OIP._OmKjmuZRS9acCos6SHYVgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Silver Hub", "imagen": "https://m.media-amazon.com/images/I/516qT+ItO5L._AC_.jpg" }
+    ]
+  },
+  {
+    "id": 27,
+    "nombre": "Procesador Ryzen 7 7800X3D",
+    "descripcion": "El procesador gaming más potente del mercado con tecnología 3D V-Cache de 8 núcleos y 16 hilos.",
+    "categoria": "Componentes",
+    "precio": 7800.00,
+    "disenos": [
+      { "nombre": "Edición Box Estándar", "imagen": "https://www.amd.com/content/dam/amd/en/images/products/processors/ryzen/2505503-ryzen-7-7800x3d.jpg" },
+      { "nombre": "Afuera de la caja", "imagen": "https://tse2.mm.bing.net/th/id/OIP.DLSgoZRTAyP4Ah3m3n-s0QHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 28,
+    "nombre": "Enfriamiento Líquido AIO 360mm",
+    "descripcion": "Disipador de agua con radiador triple, pantalla LCD personalizable en la bomba y ventiladores ARGB.",
+    "categoria": "Componentes",
+    "precio": 3599.8,
+    "disenos": [
+      { "nombre": "Edición Stealth Black", "imagen": "https://tse3.mm.bing.net/th/id/OIP.Vi8mg5wQOyYvehhNIk8ziQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Snow White", "imagen": "https://tse2.mm.bing.net/th/id/OIP.LKcGLQqm6ANU54Mhz3g8bgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 29,
+    "nombre": "Fuente de Poder 850W 80+ Gold",
+    "descripcion": "Fuente totalmente modular con certificación de eficiencia Gold, capacitores japoneses y cables mallados.",
+    "categoria": "Componentes",
+    "precio": 2610.99,
+    "disenos": [
+      { "nombre": "Edición Gold Modular", "imagen": "https://tse4.mm.bing.net/th/id/OIP.v_nKC2hAbkg6HyEaPFtz-gHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición White Cables", "imagen": "https://tse3.mm.bing.net/th/id/OIP.2pTyLEnIKseHZN6r2hs-OAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 30,
+    "nombre": "Disco SSD M.2 NVMe 2TB Gen4",
+    "descripcion": "Unidad de estado sólido ultra rápida con velocidades de lectura de hasta 7450 MB/s e disipador incluido.",
+    "categoria": "Componentes",
+    "precio": 2999.8,
+    "disenos": [
+      { "nombre": "Edición con Heatsink", "imagen": "https://tse2.mm.bing.net/th/id/OIP.RoGqGMwn8WAogToRK32fuwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición PS5 Ready", "imagen": "https://m.media-amazon.com/images/I/71rRpbp5d6L.jpg" }
+    ]
+  },
+  {
+    "id": 31,
+    "nombre": "Tarjeta Madre Z790 WiFi DDR5",
+    "descripcion": "Placa base ATX de alto rendimiento para procesadores Intel de 14va gen con PCIe 5.0 y Wi-Fi 6E.",
+    "categoria": "Componentes",
+    "precio": 5780.00,
+    "disenos": [
+      { "nombre": "Edición ROG Black", "imagen": "https://ddtech.mx/assets/uploads/ca8e61edf825f37ebd33bfa9bb98b521.jpg" },
+      { "nombre": "Edición Prime Silver", "imagen": "https://ddtech.mx/assets/uploads/dd63d319f2a817ea40886e6b840dd206.jpg" }
+    ]
+  },
+  {
+    "id": 32,
+    "nombre": "Gabinete Mid-Tower Cristal Templado",
+    "descripcion": "Chasis gamer panorámico con doble panel de vidrio templado y 4 ventiladores ARGB preinstalados.",
+    "categoria": "Componentes",
+    "precio": 2199.8,
+    "disenos": [
+      { "nombre": "Edición Obsidian Black", "imagen": "https://ddtech.mx/assets/uploads/d238dba2739948a2d0f36fd55e035001.png" },
+      { "nombre": "Edición Glacier White", "imagen": "https://tse3.mm.bing.net/th/id/OIP.YSBftuDMs-bpf9GQq50ljwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 33,
+    "nombre": "Ventiladores Reverse Blade ARGB x3",
+    "descripcion": "Pack de 3 fanes con aspas invertidas ideal para admisión de aire manteniendo la estética frontal.",
+    "categoria": "Componentes",
+    "precio": 840.00,
+    "disenos": [
+      { "nombre": "Edición Black Pack", "imagen": "https://tse2.mm.bing.net/th/id/OIP.dSGTTBsJ09O4-QKtepTkNAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición White Pack", "imagen": "https://media.ldlc.com/r1600/ld/products/00/06/26/05/LD0006260579.jpg" }
+    ]
+  },
+  {
+    "id": 34,
+    "nombre": "Tarjeta de Captura 4K60 HDR",
+    "descripcion": "Capturadora interna PCIe para retransmisión sin latencia en Twitch y YouTube a máxima calidad.",
+    "categoria": "Componentes",
+    "precio": 3990.00,
+    "disenos": [
+      { "nombre": "Edición Pro Black", "imagen": "https://th.bing.com/th/id/OIP.OOWfGTNtflT3iUSaajw45gHaFA?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición RGB Logo", "imagen": "https://th.bing.com/th/id/OIP.1X_LTsrK7tGFk_ykzrhgWgHaHa?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 35,
+    "nombre": "Kit Cables Extensiones Malladas RGB",
+    "descripcion": "Cables de alimentación de 24 pines y GPU con guía de fibra óptica iluminada ARGB programable.",
+    "categoria": "Componentes",
+    "precio": 999.8,
+    "disenos": [
+      { "nombre": "Edición Strimer Neon", "imagen": "https://tse2.mm.bing.net/th/id/OIP._PrzDCnqTnXEEQs2o8BFxQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Rainbow Glow", "imagen": "https://tse1.mm.bing.net/th/id/OIP.bBrcvXsGypg_7KboxwdkvQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 36,
+    "nombre": "Procesador Intel Core i9-14900K",
+    "descripcion": "24 núcleos y 32 hilos capaz de alcanzar hasta 6.0 GHz de velocidad turbo para gaming y renderizado.",
+    "categoria": "Componentes",
+    "precio": 569.00,
+    "disenos": [
+      { "nombre": "Edición Unlocked Box", "imagen": "https://tse2.mm.bing.net/th/id/OIP.lXhX_nA6WQl018_MoVJSWgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Otro angulo", "imagen": "https://tse4.mm.bing.net/th/id/OIP.rctHTiqL8czOJpDxZIEw8wHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 37,
+    "nombre": "Soporte Vertical GPU con Cable Riser",
+    "descripcion": "Montura para lucir la tarjeta gráfica verticalmente en el gabinete con extensión PCIe 4.0 ultra flexible.",
+    "categoria": "Componentes",
+    "precio": 1100.00,
+    "disenos": [
+      { "nombre": "Edición Black Steel", "imagen": "https://tse3.mm.bing.net/th/id/OIP.4iEP_pOvxPsHsSR3krY23gHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición White Steel", "imagen": "https://tse3.mm.bing.net/th/id/OIP.iH3OcfQrbqPN_gUAzZui5AHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 38,
+    "nombre": "Pasta Térmica Extrema de Carbono",
+    "descripcion": "Jeringa de 4g de compuesto térmico de alta conductividad para overclocking exigente sin conductividad eléctrica.",
+    "categoria": "Componentes",
+    "precio": 596.00,
+    "disenos": [
+      { "nombre": "Edición 4g Syringe", "imagen": "https://tse3.mm.bing.net/th/id/OIP.yUgla94Wqun3E3EQQx7nawHaE_?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Cleaner Kit Included", "imagen": "https://tse1.mm.bing.net/th/id/OIP.8lznpzogehXYH4kO6XuibAHaFH?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+    {
+    "id": 39,
+    "nombre": "USB",
+    "descripcion": "Almacenamiento de 124gb confiable , transferencia rápida, compatible con PC, laptop, TV y auto. Ideal para documentos, fotos, música y videos.",
+    "categoria": "Periféricos RGB",
+    "precio": 150.00,
+    "disenos": [
+      { "nombre": "Edición Sandisk", "imagen": "https://tse1.mm.bing.net/th/id/OIP.8ZD_tHQ0o07S0LEn5Sgb8gHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Adata", "imagen": "https://http2.mlstatic.com/memoria-usb-128gb-adata-uv128-auv128-128g-rbe-negro-D_NQ_NP_727229-MLM29074727072_122018-F.jpg" }
+    ]
+  },
+{
+    "id": 40,
+    "nombre": "Organizador de Cables Magnético",
+    "descripcion": "Canaleta inferior para escritorio con clips magnéticos para mantener todos los cables ocultos y ordenados.",
+    "categoria": "Sillas & Setup",
+    "precio": 599.8,
+    "disenos": [
+      { "nombre": "Edición Stealth Black", "imagen": "https://th.bing.com/th/id/OIP.hMsylFBx7iiJmlAU1xgJbwHaHa?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Pure White", "imagen": "https://m.media-amazon.com/images/I/71kjAYiudvL._AC_.jpg" }
+    ]
+  },
+  {
+    "id": 41,
+    "nombre": "Barra de Luz LED para Monitor ScreenBar",
+    "descripcion": "Lámpara de pantalla táctil con control de temperatura de color y brillo sin reflejos en el monitor.",
+    "categoria": "Sillas & Setup",
+    "precio": 499.80,
+    "disenos": [
+      { "nombre": "Edición Matte Black", "imagen": "https://m.media-amazon.com/images/I/71a2jqwoTHL.jpg" },
+      { "nombre": "Edición Space Grey", "imagen": "https://tse1.mm.bing.net/th/id/OIP.aWt5CFcwxvY3C8SHYXf1jQHaGQ?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 42,
+    "nombre": "Reposapiés Ergonómico de Espuma Viscoelástica",
+    "descripcion": "Cojín de descanso para pies con funda lavable antideslizante, ideal para largas jornadas de juego.",
+    "categoria": "Sillas & Setup",
+    "precio": 699.80,
+    "disenos": [
+      { "nombre": "Edición Carbon Grey", "imagen": "https://tse2.mm.bing.net/th/id/OIP.6tv_OqJQ4_w6SAxFtTvtdAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Midnight Black", "imagen": "https://tse1.mm.bing.net/th/id/OIP.l1e0SSRIwVk1_4PR6i_eRwHaHh?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 43,
+    "nombre": "Tira LED Neon Flex Smart RGBIC 3M",
+    "descripcion": "Manguera de neón moldeable para pared o escritorio con control por voz y sincronización de efectos.",
+    "categoria": "Sillas & Setup",
+    "precio": 799.8,
+    "disenos": [
+      { "nombre": "Edición Neon Cyberpunk", "imagen": "https://tse4.mm.bing.net/th/id/OIP.34WZLPoZPeVxDHNajnqv0gHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición RGB Wave", "imagen": "https://tse2.mm.bing.net/th/id/OIP.jwOxuJ1hd4FN6m-eEYt1dAHaHI?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 44,
+    "nombre": "Soporte de Monitor Ajustable en Altura",
+    "descripcion": "Base para monitor con ajuste de altura y ángulo, compatible con pantallas de hasta 32 pulgadas.",
+    "categoria": "Sillas & Setup",
+    "precio": 1199.8,
+    "disenos": [
+      { "nombre": "Edición Black Steel", "imagen": "https://tse4.mm.bing.net/th/id/OIP.hJLtz8wWGQt5krrxb9tbcwAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición White Steel", "imagen": "https://tse4.mm.bing.net/th/id/OIP.vySzCqZWFIolNK6xxG7NFAAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 45,
+    "nombre": "Soporte de Auriculares Pared Magnético",
+    "descripcion": "Gancho de aluminio para colgar diadema debajo del escritorio o en el gabinete con recubrimiento de silicona.",
+    "categoria": "Sillas & Setup",
+    "precio": 319.8,
+    "disenos": [
+      { "nombre": "Edición Anodized Black", "imagen": "https://ae01.alicdn.com/kf/S8e68ec815120409ca2f26a05a98fed2bd.jpg" },
+      { "nombre": "Edición Silver Metallic", "imagen": "https://ae01.alicdn.com/kf/S58d969d6ce2c4fa3b9b4cd6bc8f1025aN/Nuevo-soporte-Universal-para-auriculares-colgador-de-montaje-en-pared-de-pl-stico-adhesivo-debajo-del.jpg" }
+    ]
+  },
+  {
+    "id": 46,
+    "nombre": "Tapete para Silla de Ruedas Protect Pro",
+    "descripcion": "Alfombra circular para piso de 120cm con base de goma antideslizante para proteger la duela y reducir ruido.",
+    "categoria": "Sillas & Setup",
+    "precio": 750.00,
+    "disenos": [
+      { "nombre": "Edición black", "imagen": "https://m.media-amazon.com/images/I/81nyquvNrSL._AC_SL1500_.jpg" },
+      { "nombre": "Edición white", "imagen": "https://m.media-amazon.com/images/I/91wkbys7opS._AC_SL1500_.jpg" }
+    ]
+  },
+  {
+    "id": 47,
+    "nombre": "Control Táctil Stream Deck 15 Teclas",
+    "descripcion": "Consola de macros LCD totalmente personalizable para cambiar escenas, lanzar audios y controlar transmisiones.",
+    "categoria": "Sillas & Setup",
+    "precio": 149.99,
+    "disenos": [
+      { "nombre": "Edición Obsidian Black", "imagen": "https://tse3.mm.bing.net/th/id/OIP.tgHq4-fsLQmzlGG9-OA-nwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Arctic White", "imagen": "https://down-th.img.susercontent.com/file/c9600a273377280822f2ecc92014a25a" }
+    ]
+  },
+  {
+    "id": 48,
+    "nombre": "Brazo Articulado para Micrófono Heavy-Duty",
+    "descripcion": "Soporte de mesa con resortes internos silenciosos, gestión de cable integrada y rotación de 360 grados.",
+    "categoria": "Sillas & Setup",
+    "precio": 919.8,
+    "disenos": [
+      { "nombre": "Edición Matte Black", "imagen": "https://http2.mlstatic.com/D_NQ_NP_689291-CBT50104748843_052022-O.webp" },
+      { "nombre": "Edición White Edition", "imagen": "https://tse2.mm.bing.net/th/id/OIP.pRde5tDSNoewH9x40KztzgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+  },
+  {
+    "id": 49,
+    "nombre": "Cojín Lumbar Ergonómico Memory Foam",
+    "descripcion": "Almohadilla adaptativa para cualquier silla con correas ajustables y malla respirable de alta calidad.",
+    "categoria": "Sillas & Setup",
+    "precio": 500.00,
+    "disenos": [
+      { "nombre": "Edición Black Fabric", "imagen": "https://tse4.mm.bing.net/th/id/OIP.FlVRBYPo9X2t4UwYCrnaDwHaGx?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición Cool Blue Gel", "imagen": "https://tse1.mm.bing.net/th/id/OIP.DwXqMGpZAVWJTt4go3CUfAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }
+    ]
+    
+  },
+  {
+    "id": 50,
+    "nombre": "control xbox",
+    "descripcion": "Control inalámbrico para Xbox con diseño ergonómico, botones personalizables y compatibilidad con PC y consolas.",
+    "categoria": "Periféricos RGB",
+    "precio": 919.8,
+    "disenos": [
+      { "nombre": "Edición Matte Black", "imagen": "https://tse1.mm.bing.net/th/id/OIP.wzRJY6cnGtHbYJfJXMqMUwHaFC?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" },
+      { "nombre": "Edición White Edition", "imagen": "https://m.media-amazon.com/images/I/61H321AbQuL._AC_SL1500_.jpg" }
+    ]
+  }
+]

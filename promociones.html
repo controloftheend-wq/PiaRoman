@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cyber. — Catálogo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="site-header">
+    <header>
+      <div class="logo" onclick="mostrarPaginaInicio()">
+        <span class="logo-index">+1</span> cyber.
+      </div>
+
+      <div class="search-wrapper">
+        <input type="text" id="search-input" class="search-box" placeholder="Buscar consolas, periféricos, marcas..." autocomplete="off">
+        <button type="button" id="search-clear-btn" class="search-clear-btn" aria-label="Limpiar búsqueda" hidden>✕</button>
+        <div id="search-autocomplete" class="search-autocomplete" hidden></div>
+      </div>
+
+      <div class="header-actions">
+        <a href="promociones.html" class="coupons-nav-btn">Cupones (<span id="coupons-count">0</span>)</a>
+        <button class="cart-button" onclick="toggleCarrito()">Carrito (<span id="cart-count">0</span>)</button>
+      </div>
+    </header>
+
+    <nav class="top-nav" aria-label="Navegación principal">
+     <div class="top-nav-links">
+        <a href="promociones.html" class="nav-link active">Promociones</a>
+        <a href="acerca.html" class="nav-link">Acerca de</a>
+        <a href="index.html" class="nav-link">Catálogo</a>
+        <a href="sucursales.html" class="nav-link">Sucursales</a>
+        <a href="historia.html" class="nav-link">Historia</a>
+      </div>
+      <span class="nav-meta">ENVÍO GRATIS DESDE $1,500 MXN</span>
+    </nav>
+  </div>
+
+  <div id="home-view" class="view active">
+    <section class="editorial-hero">
+      <div class="hero-frame">
+        <div class="hero-left">
+          <div class="hero-kicker">X/LAB — HARDWARE DE CREACIÓN</div>
+          <div class="hero-brand-display">cyber<span>.</span></div>
+          <div class="hero-bottom-row">
+            <div class="hero-index-num">001</div>
+            <p class="hero-copy">
+              Equipamiento gaming de precisión, periféricos mecánicos y consolas de nueva generación.
+            </p>
+          </div>
+        </div>
+
+        <div class="carousel-container">
+          <div class="hero-arrow-box" aria-hidden="true">→</div>
+          <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200');">
+            <div class="slide-content">
+              <div>
+                <div class="slide-title">GEAR GAMING NEXT-GEN</div>
+                <p>Edición Studio / Tecnología RGB de alto rendimiento</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200');">
+            <div class="slide-content">
+              <div>
+                <div class="slide-title">NUEVOS LANZAMIENTOS</div>
+                <p>Consolas, mandos y teclados mecánicos para tu setup</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="main-container">
+      <aside>
+        <div class="filter-group">
+          <h3>Categorías</h3>
+          <div id="category-filters">
+            <button class="cat-btn active" onclick="filtrarCategoria('Todas', this)">
+              <span>Todas</span><span class="cat-count" data-cat="Todas">0</span>
+            </button>
+            <button class="cat-btn" onclick="filtrarCategoria('Consolas', this)">
+              <span>Consolas</span><span class="cat-count" data-cat="Consolas">0</span>
+            </button>
+            <button class="cat-btn" onclick="filtrarCategoria('Periféricos RGB', this)">
+              <span>Periféricos RGB</span><span class="cat-count" data-cat="Periféricos RGB">0</span>
+            </button>
+            <button class="cat-btn" onclick="filtrarCategoria('Sillas & Setup', this)">
+              <span>Sillas &amp; Setup</span><span class="cat-count" data-cat="Sillas & Setup">0</span>
+            </button>
+            <button class="cat-btn" onclick="filtrarCategoria('Componentes', this)">
+              <span>Componentes</span><span class="cat-count" data-cat="Componentes">0</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h3>Rango de Precio</h3>
+          <div id="price-filters">
+            <button class="cat-btn active" onclick="filtrarPrecio('1000-5000', this)">Todos las ofertas</button>
+  
+          </div>
+        </div>
+      </aside>
+
+      <section class="catalog-content">
+        <div class="catalog-toolbar">
+          <span id="results-counter" class="results-counter">Cargando productos...</span>
+          <div class="sort-wrapper">
+            <label for="sort-select">Ordenar:</label>
+            <select id="sort-select" class="sort-select" onchange="cambiarOrden(this.value)">
+              <option value="relevance">Relevancia</option>
+              <option value="price-asc">Menor precio</option>
+              <option value="price-desc">Mayor precio</option>
+            </select>
+          </div>
+        </div>
+
+        <main class="products-grid" id="products-container"></main>
+      </section>
+    </div>
+  </div>
+
+  <div id="product-detail-view" class="view">
+    <div class="detail-container">
+      <div class="detail-top-bar">
+        <button class="btn-back" onclick="mostrarPaginaInicio()">← Volver al Catálogo</button>
+        <nav id="detail-breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav>
+      </div>
+
+      <div class="detail-grid-3">
+        <!-- Columna 1: Galería -->
+        <div class="detail-gallery">
+          <div class="detail-img-frame">
+            <img id="detail-img" class="detail-img-main" src="" alt="">
+          </div>
+          <div class="design-section">
+            <div class="design-title">Edición / Variante: <span id="selected-design-name"></span></div>
+            <div id="detail-designs" class="design-list"></div>
+          </div>
+        </div>
+
+        <!-- Columna 2: Información -->
+        <div class="detail-info">
+          <div id="detail-category" class="detail-category"></div>
+          <h1 id="detail-title" class="detail-title"></h1>
+          <div class="detail-meta-tags">
+            <span class="meta-pill">GARANTÍA OFICIAL 12 MESES</span>
+            <span class="meta-pill">DISPONIBLE EN STOCK</span>
+          </div>
+          <div class="detail-specs-box">
+            <h3>Descripción del producto</h3>
+            <p id="detail-desc" class="detail-desc"></p>
+          </div>
+        </div>
+
+        <!-- Columna 3: Buy Box (Estilo Amazon / Mercado Libre) -->
+        <aside class="buy-box">
+          <div id="buy-box-price" class="detail-price"></div>
+          <div id="buy-box-discount" class="buy-box-discount" hidden></div>
+          <div id="buy-box-shipping" class="buy-box-shipping"></div>
+
+          <div class="buy-box-pickup">
+            Retiro gratis disponible en <a href="sucursales.html">nuestras sucursales</a>.
+          </div>
+
+          <div class="qty-row">
+            <span>Cantidad</span>
+            <div class="qty-control">
+              <button type="button" onclick="cambiarCantidadDetalle(-1)">−</button>
+              <span id="detail-qty">1</span>
+              <button type="button" onclick="cambiarCantidadDetalle(1)">+</button>
+            </div>
+          </div>
+
+          <button id="detail-add-btn" class="checkout-btn">Agregar al Carrito</button>
+          <button type="button" class="buy-now-btn" onclick="comprarAhoraDetalle()">Comprar Ahora</button>
+        </aside>
+      </div>
+
+      <section class="related-section" id="related-section" hidden>
+        <div class="related-header">
+          <h2>También te puede interesar</h2>
+          <span>Misma categoría</span>
+        </div>
+        <div id="related-products-grid" class="related-grid"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Carrito Lateral -->
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h2>TU CARRITO</h2>
+      <button class="close-btn" onclick="toggleCarrito()">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items-container"></div>
+    <div class="cart-footer">
+      <div id="cart-coupon-status" class="cart-coupon-status"></div>
+      <div class="cart-summary">
+        <div class="summary-row"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
+        <div class="summary-row" id="cart-discount-row" hidden><span>Descuento</span><span id="cart-discount">-$0.00</span></div>
+        <div class="summary-row"><span>Envío</span><span id="cart-shipping">$0.00</span></div>
+        <div class="summary-row total"><span>Total</span><span>$<span id="cart-total">0.00</span></span></div>
+      </div>
+      <button class="checkout-btn" onclick="vaciarCarrito()">Finalizar Compra</button>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <div class="logo"><span class="logo-index">+1</span> cyber.</div>
+        <p class="footer-copy">Hardware de precisión, consolas y periféricos gaming con envío nacional y garantía oficial.</p>
+      </div>
+      <div>
+        <h4>Navegación</h4>
+        <a href="index.html">Catálogo</a>
+        <a href="promociones.html">Promociones &amp; Cupones</a>
+        <a href="acerca.html">Acerca de</a>
+        <a href="sucursales.html">Sucursales</a>
+        <a href="historia.html">Historia</a>
+      </div>
+      <div>
+        <h4>Atención</h4>
+        <span>Envío gratis desde $1,500 MXN</span>
+        <span>Soporte: soporte@cyberzone.mx</span>
+        <span>Lun - Sáb: 10:00 a 20:00 hrs</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 cyber. — Todos los derechos reservados</span>
+      <span>X/LAB EDITION</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

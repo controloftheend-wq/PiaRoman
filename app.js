@@ -3,18 +3,43 @@ const FREE_SHIPPING_MIN = 1500;
 const SHIPPING_COST = 149;
 
 const BASE_COUPONS = [
-  { code: 'CYBER10', discountPct: 10, title: '10% DTO', desc: 'Válido en toda la tienda sin mínimo de compra.', won: false },
-  { code: 'SETUP15', discountPct: 15, title: '15% DTO', desc: 'Ideal para armar o renovar tu setup completo.', won: false },
-  { code: 'PRO20', discountPct: 20, title: '20% DTO', desc: 'Descuento especial en hardware y consolas.', won: false }
+  {
+    code: 'CYBER15',
+    type: 'percent',
+    discountPct: 15,
+    badge: 'Descuento %',
+    title: '15% DTO en Tienda',
+    desc: 'Ahorra 15% en cualquier celular o producto sin mínimo de compra.',
+    won: false
+  },
+  {
+    code: 'ENVIOFREE',
+    type: 'shipping',
+    freeShipping: true,
+    badge: 'Envío',
+    title: 'Envío Gratis',
+    desc: 'Elimina el costo de envío ($149 MXN) en pedidos menores a $1,500.',
+    won: false
+  },
+  {
+    code: 'BONO500',
+    type: 'fixed',
+    discountAmount: 500,
+    minPurchase: 2500,
+    badge: 'Bono MXN',
+    title: '-$500 MXN Directos',
+    desc: 'Descuento fijo de $500 MXN en compras desde $2,500 MXN.',
+    won: false
+  }
 ];
 
 const WHEEL_PRIZES = [
-  { label: '10% DTO', code: 'ROULETTE10', discountPct: 10, color: '#111111', text: '#ffffff' },
-  { label: '25% DTO', code: 'ROULETTE25', discountPct: 25, color: '#ff3b1d', text: '#ffffff' },
-  { label: '15% DTO', code: 'ROULETTE15', discountPct: 15, color: '#eaeae6', text: '#111111' },
-  { label: '50% DTO', code: 'MEGA50', discountPct: 50, color: '#111111', text: '#ffffff' },
-  { label: '30% DTO', code: 'ROULETTE30', discountPct: 30, color: '#ff3b1d', text: '#ffffff' },
-  { label: '20% DTO', code: 'ROULETTE20', discountPct: 20, color: '#f3f3f1', text: '#111111' }
+  { label: '10% DTO', code: 'RULETA10', type: 'percent', discountPct: 10, desc: '10% de descuento desbloqueado en la ruleta.', color: '#1c1e21', text: '#ffffff' },
+  { label: '25% DTO', code: 'RULETA25', type: 'percent', discountPct: 25, desc: '25% de descuento especial ganado en la ruleta.', color: '#2563eb', text: '#ffffff' },
+  { label: '-$300 MXN', code: 'PREMIO300', type: 'fixed', discountAmount: 300, minPurchase: 1500, desc: '$300 MXN de descuento en compras desde $1,500.', color: '#eef0f4', text: '#1c1e21' },
+  { label: '50% DTO', code: 'MEGA50', type: 'percent', discountPct: 50, desc: '¡Premio mayor! 50% de descuento en tu compra.', color: '#1c1e21', text: '#ffffff' },
+  { label: 'ENVÍO VIP', code: 'ENVIOVIP', type: 'shipping', freeShipping: true, desc: 'Envío gratis VIP sin mínimo de compra.', color: '#2563eb', text: '#ffffff' },
+  { label: '20% DTO', code: 'RULETA20', type: 'percent', discountPct: 20, desc: '20% de descuento desbloqueado en la ruleta.', color: '#eef0f4', text: '#1c1e21' }
 ];
 
 let productos = [];
@@ -31,6 +56,27 @@ let currentRotation = 0;
 let carrito = JSON.parse(localStorage.getItem('cyber_cart') || '[]');
 let cuponesGanados = JSON.parse(localStorage.getItem('cyber_won_coupons') || '[]');
 let cuponActivo = JSON.parse(localStorage.getItem('cyber_active_coupon') || 'null');
+
+/* ===== ANIMACIÓN DE TARJETAS AL HACER SCROLL ===== */
+document.documentElement.classList.add('js-anim');
+
+const observadorTarjetas = new IntersectionObserver((entradas) => {
+  let n = 0;
+  entradas.forEach((entrada) => {
+    if (entrada.isIntersecting) {
+      entrada.target.style.setProperty('--i', n++);
+      entrada.target.classList.add('is-visible');
+      observadorTarjetas.unobserve(entrada.target);
+    }
+  });
+}, { rootMargin: '0px 0px -8% 0px' });
+
+function observarCatalogo(container) {
+  if (!container) return;
+  container.querySelectorAll('.product-card').forEach((card) => {
+    observadorTarjetas.observe(card);
+  });
+}
 
 function formatMoney(num) {
   return Number(num || 0).toLocaleString('es-MX', {
@@ -64,7 +110,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   actualizarContadorCupones();
   configurarBuscador();
 
-  if (document.getElementById('products-container')) {
+  const productsContainer = document.getElementById('products-container');
+  if (productsContainer) {
+    new MutationObserver(() => observarCatalogo(productsContainer))
+      .observe(productsContainer, { childList: true });
     await cargarProductos();
   }
 
@@ -100,7 +149,7 @@ async function cargarProductos() {
       .filter(p => p && p.nombre && typeof p.precio === 'number')
       .map(p => ({
         ...p,
-        categoria: p.categoria || 'Consolas',
+        categoria: p.categoria || 'Celulares',
         disenos: Array.isArray(p.disenos) ? p.disenos : []
       }));
 
@@ -109,7 +158,7 @@ async function cargarProductos() {
   } catch (err) {
     console.error('Error cargando productos.json:', err);
     if (grid) {
-      grid.innerHTML = `<div class="empty-state">No se pudo cargar <strong>productos.json</strong>. Abre el proyecto usando un servidor local (Live Server o <code>python3 -m http.server</code>).</div>`;
+      grid.innerHTML = `<div class="empty-state">No se pudo cargar <strong>productos.json</strong>. Abre el proyecto usando Live Server o <code>python3 -m http.server</code>.</div>`;
     }
   }
 }
@@ -171,24 +220,31 @@ function renderizarCatalogo() {
 
     return `
       <article class="product-card">
-        <div>
-          <div class="product-img-wrap" onclick="verDetalle(${p.id})">
-            <img class="product-img" src="${img}" alt="${p.nombre}" loading="lazy">
+        <div class="product-card-inner">
+          <div class="product-card-front">
+            <div>
+              <div class="product-img-wrap" onclick="verDetalle(${p.id})">
+                <img class="product-img" src="${img}" alt="${p.nombre}" loading="lazy">
+              </div>
+              <div class="product-badges">
+                <span class="product-cat-label">${p.categoria}</span>
+                ${envioGratis}
+              </div>
+              <h3 class="product-title" onclick="verDetalle(${p.id})">${p.nombre}</h3>
+            </div>
+            <div>
+              <div class="product-price">$${formatMoney(p.precio)}</div>
+              ${variantes}
+              <button type="button" class="btn-add" onclick="agregarRapido(${p.id})">Agregar al carrito</button>
+            </div>
           </div>
-          <div class="product-badges">
-            <span class="product-cat-label">${p.categoria}</span>
-            ${envioGratis}
-          </div>
-          <h3 class="product-title" onclick="verDetalle(${p.id})">${p.nombre}</h3>
-        </div>
-        <div>
-          <div class="product-price">$${formatMoney(p.precio)}</div>
-          ${variantes}
-          <button class="btn-add" onclick="agregarRapido(${p.id})">Agregar al carrito</button>
+          <div class="product-card-back" aria-hidden="true"></div>
         </div>
       </article>
     `;
   }).join('');
+
+  observarCatalogo(container);
 }
 
 /* ===== FILTROS Y BUSCADOR ===== */
@@ -291,8 +347,8 @@ function verDetalle(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
   document.getElementById('detail-breadcrumbs').innerHTML = `
-    <button onclick="mostrarPaginaInicio()">Catálogo</button> /
-    <button onclick="irACategoria('${producto.categoria}')">${producto.categoria}</button> /
+    <button type="button" onclick="mostrarPaginaInicio()">Catálogo</button> /
+    <button type="button" onclick="irACategoria('${producto.categoria}')">${producto.categoria}</button> /
     <span>${producto.nombre}</span>
   `;
 
@@ -308,8 +364,11 @@ function verDetalle(id) {
 
   const discountEl = document.getElementById('buy-box-discount');
   if (cuponActivo) {
-    const finalPrice = producto.precio * (1 - cuponActivo.discountPct / 100);
-    discountEl.textContent = `Con cupón ${cuponActivo.code} (${cuponActivo.discountPct}% DTO): $${formatMoney(finalPrice)}`;
+    const beneficio = calcularBeneficioCupon(producto.precio, cuponActivo);
+    const finalPrice = Math.max(0, producto.precio - beneficio.discount);
+    discountEl.textContent = beneficio.discount > 0
+      ? `Con cupón ${cuponActivo.code} (${beneficio.etiqueta}): $${formatMoney(finalPrice)}`
+      : `Cupón activo ${cuponActivo.code}: ${beneficio.etiqueta}`;
     discountEl.hidden = false;
   } else {
     discountEl.hidden = true;
@@ -372,7 +431,7 @@ function renderizarRelacionados(producto) {
 
   section.hidden = false;
   grid.innerHTML = relacionados.map(p => `
-    <article class="product-card">
+    <article class="product-card is-visible">
       <div class="product-img-wrap" onclick="verDetalle(${p.id})">
         <img class="product-img" src="${getImagenProducto(p)}" alt="${p.nombre}">
       </div>
@@ -397,7 +456,7 @@ function irACategoria(cat) {
   filtrarCategoria(cat, btn);
 }
 
-/* ===== CARRITO ===== */
+/* ===== CARRITO Y CUPONES ===== */
 function agregarRapido(id) {
   const p = productos.find(item => item.id === id);
   if (!p) return;
@@ -461,12 +520,35 @@ function actualizarContadorCarrito() {
   document.querySelectorAll('#cart-count').forEach(el => { el.textContent = totalItems; });
 }
 
+function calcularBeneficioCupon(subtotal, cupon) {
+  if (!cupon || subtotal <= 0) {
+    return { discount: 0, freeShipping: false, etiqueta: '' };
+  }
+  if (cupon.type === 'shipping' || cupon.freeShipping) {
+    return { discount: 0, freeShipping: true, etiqueta: 'Envío Gratis' };
+  }
+  if (cupon.type === 'fixed' && cupon.discountAmount) {
+    const min = cupon.minPurchase || 0;
+    if (subtotal < min) {
+      return { discount: 0, freeShipping: false, etiqueta: `Mínimo $${formatMoney(min)}` };
+    }
+    const desc = Math.min(subtotal, cupon.discountAmount);
+    return { discount: desc, freeShipping: false, etiqueta: `-$${formatMoney(desc)}` };
+  }
+  const pct = cupon.discountPct || 0;
+  return {
+    discount: subtotal * (pct / 100),
+    freeShipping: false,
+    etiqueta: `-${pct}%`
+  };
+}
+
 function renderizarCarrito() {
   const container = document.getElementById('cart-items-container');
   if (!container) return;
 
   if (carrito.length === 0) {
-    container.innerHTML = `<p style="font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding: 24px 0;">Tu carrito está vacío.</p>`;
+    container.innerHTML = `<p style="font-size: 0.9rem; color: var(--muted); padding: 24px 0;">Tu carrito está vacío.</p>`;
   } else {
     container.innerHTML = carrito.map((item, idx) => `
       <div class="cart-item">
@@ -475,10 +557,10 @@ function renderizarCarrito() {
           <div class="cart-item-title">${item.nombre}</div>
           <div class="cart-item-variant">${item.variant} · $${formatMoney(item.precio)}</div>
           <div class="cart-item-controls">
-            <button class="cart-qty-btn" onclick="cambiarCantidadCarrito(${idx}, -1)">−</button>
+            <button type="button" class="cart-qty-btn" onclick="cambiarCantidadCarrito(${idx}, -1)">−</button>
             <span>${item.cantidad}</span>
-            <button class="cart-qty-btn" onclick="cambiarCantidadCarrito(${idx}, 1)">+</button>
-            <button class="cart-remove-btn" onclick="eliminarDelCarrito(${idx})">Eliminar</button>
+            <button type="button" class="cart-qty-btn" onclick="cambiarCantidadCarrito(${idx}, 1)">+</button>
+            <button type="button" class="cart-remove-btn" onclick="eliminarDelCarrito(${idx})">Eliminar</button>
           </div>
         </div>
       </div>
@@ -486,9 +568,9 @@ function renderizarCarrito() {
   }
 
   const subtotal = carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
-  const discount = cuponActivo ? subtotal * (cuponActivo.discountPct / 100) : 0;
-  const afterDiscount = Math.max(0, subtotal - discount);
-  const shipping = subtotal === 0 || afterDiscount >= FREE_SHIPPING_MIN ? 0 : SHIPPING_COST;
+  const beneficio = calcularBeneficioCupon(subtotal, cuponActivo);
+  const afterDiscount = Math.max(0, subtotal - beneficio.discount);
+  const shipping = (subtotal === 0 || afterDiscount >= FREE_SHIPPING_MIN || beneficio.freeShipping) ? 0 : SHIPPING_COST;
   const total = afterDiscount + shipping;
 
   document.getElementById('cart-subtotal').textContent = `$${formatMoney(subtotal)}`;
@@ -500,12 +582,16 @@ function renderizarCarrito() {
   const couponStatus = document.getElementById('cart-coupon-status');
 
   if (cuponActivo) {
-    discountRow.hidden = false;
-    discountVal.textContent = `-$${formatMoney(discount)}`;
-    couponStatus.innerHTML = `<span>Cupón activo: ${cuponActivo.code} (-${cuponActivo.discountPct}%)</span><button class="cart-remove-btn" onclick="quitarCupon()">Quitar</button>`;
+    if (beneficio.discount > 0) {
+      discountRow.hidden = false;
+      discountVal.textContent = `-$${formatMoney(beneficio.discount)}`;
+    } else {
+      discountRow.hidden = true;
+    }
+    couponStatus.innerHTML = `<span>Cupón activo: ${cuponActivo.code} (${beneficio.etiqueta})</span><button type="button" class="cart-remove-btn" onclick="quitarCupon()">Quitar</button>`;
   } else {
     discountRow.hidden = true;
-    couponStatus.innerHTML = `<span>¿Tienes un cupón? <a href="promociones.html" style="color:inherit;">Ir a Promociones</a></span>`;
+    couponStatus.innerHTML = `<span>¿Tienes un cupón? <a href="promociones.html" style="color:inherit;">Actívalo aquí</a></span>`;
   }
 }
 
@@ -543,19 +629,20 @@ function renderizarCupones() {
   const lista = getTodosLosCupones();
   container.innerHTML = lista.map(c => {
     const isApplied = cuponActivo?.code === c.code;
+    const etiquetaBadge = c.won ? 'Ganado en Ruleta' : (c.badge || 'Cupón Activo');
     return `
       <article class="coupon-card ${c.won ? 'won-coupon' : ''}">
         <div>
-          <span class="coupon-card-badge">${c.won ? 'Ganado en Ruleta' : 'Cupón Activo'}</span>
+          <span class="coupon-card-badge">${etiquetaBadge}</span>
           <h3 class="coupon-card-title">${c.title}</h3>
           <p class="coupon-card-desc">${c.desc}</p>
         </div>
         <div class="coupon-card-footer">
           <span class="coupon-card-code">${c.code}</span>
           <div class="coupon-card-actions">
-            <button class="coupon-btn-copy" onclick="copiarCodigo('${c.code}')">Copiar</button>
-            <button class="coupon-btn-apply ${isApplied ? 'applied' : ''}" onclick="aplicarCupon('${c.code}')">
-              ${isApplied ? 'Aplicado' : 'Aplicar'}
+            <button type="button" class="coupon-btn-copy" onclick="copiarCodigo('${c.code}')">Copiar</button>
+            <button type="button" class="coupon-btn-apply ${isApplied ? 'applied' : ''}" onclick="aplicarCupon('${c.code}')">
+              ${isApplied ? 'Activado ✓' : 'Activar'}
             </button>
           </div>
         </div>
@@ -571,23 +658,67 @@ function aplicarCupon(code) {
   localStorage.setItem('cyber_active_coupon', JSON.stringify(cuponActivo));
   renderizarCupones();
   renderizarCarrito();
-  mostrarToast(`✓ Cupón ${cupon.code} (${cupon.discountPct}% DTO) activado`);
+  mostrarToast(`✓ Cupón ${cupon.code} (${cupon.title}) activado`);
 }
 
 function quitarCupon() {
   cuponActivo = null;
   localStorage.removeItem('cyber_active_coupon');
+  renderizarCupones();
   renderizarCarrito();
+  mostrarToast('Cupón desactivado');
 }
 
 function copiarCodigo(code) {
   navigator.clipboard?.writeText(code);
-  mostrarToast(`Código ${code} copiado`);
+  mostrarToast(`Código ${code} copiado al portapapeles`);
 }
 
 function abrirRuleta() {
   const overlay = document.getElementById('temu-wheel-overlay');
   if (overlay) overlay.classList.remove('hidden');
+}
+
+function cerrarRuletaEIrACupones() {
+  const overlay = document.getElementById('temu-wheel-overlay');
+  if (overlay) overlay.classList.add('hidden');
+  irACupones();
+}
+
+function lanzarConfeti() {
+  const canvas = document.getElementById('confetti-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+
+  const colores = ['#2563eb', '#15803d', '#f59e0b', '#1c1e21', '#3b82f6'];
+  const piezas = Array.from({ length: 65 }, () => ({
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    vx: (Math.random() - 0.5) * 10,
+    vy: (Math.random() - 0.7) * 10,
+    size: Math.random() * 6 + 4,
+    color: colores[Math.floor(Math.random() * colores.length)],
+    life: 70
+  }));
+
+  function animar() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let vivos = false;
+    piezas.forEach(p => {
+      if (p.life <= 0) return;
+      vivos = true;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.25;
+      p.life -= 1;
+      ctx.fillStyle = p.color;
+      ctx.fillRect(p.x, p.y, p.size, p.size);
+    });
+    if (vivos) requestAnimationFrame(animar);
+  }
+  animar();
 }
 
 function inicializarRuleta() {
@@ -600,6 +731,7 @@ function inicializarRuleta() {
   const codeText = document.getElementById('result-coupon-code');
   const copyBtn = document.getElementById('copy-coupon-btn');
 
+  if (!canvas) return;
   dibujarRuleta(canvas);
 
   closeBtn?.addEventListener('click', () => overlay.classList.add('hidden'));
@@ -613,22 +745,30 @@ function inicializarRuleta() {
       isSpinning = true;
       const winIndex = Math.floor(Math.random() * WHEEL_PRIZES.length);
       const sliceDeg = 360 / WHEEL_PRIZES.length;
-      const targetAngle = 360 * 5 + (270 - (winIndex * sliceDeg + sliceDeg / 2));
-      currentRotation += targetAngle - (currentRotation % 360);
+      const targetMod = (270 - (winIndex * sliceDeg + sliceDeg / 2) + 360) % 360;
+      const delta = ((targetMod - (currentRotation % 360)) + 360) % 360;
+      currentRotation += 360 * 5 + delta;
       canvas.style.transform = `rotate(${currentRotation}deg)`;
 
       setTimeout(() => {
         isSpinning = false;
         const premio = WHEEL_PRIZES[winIndex];
+        window.cuponGanado = premio.code;
+
         prizeText.textContent = premio.label;
         codeText.textContent = premio.code;
         resultBox.classList.add('active');
+        lanzarConfeti();
 
         const nuevoCupon = {
           code: premio.code,
+          type: premio.type,
           discountPct: premio.discountPct,
+          discountAmount: premio.discountAmount,
+          minPurchase: premio.minPurchase,
+          freeShipping: premio.freeShipping,
           title: premio.label,
-          desc: 'Premio desbloqueado en la ruleta de promociones.',
+          desc: premio.desc,
           won: true
         };
 
@@ -663,108 +803,13 @@ function dibujarRuleta(canvas) {
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    
     ctx.save();
     ctx.translate(cx, cy);
     ctx.rotate(start + slice / 2);
     ctx.fillStyle = p.text;
-    ctx.font = 'bold 14px "IBM Plex Mono", monospace';
+    ctx.font = 'bold 13px system-ui, sans-serif';
     ctx.textAlign = 'right';
-    ctx.fillText(p.label, radius - 18, 5);
+    ctx.fillText(p.label, radius - 16, 5);
     ctx.restore();
   });
 }
-
-
-/* cupones.js — Cupones de promoción de cyber.*/
-
-const CLAVE_CUPON = 'cyber_cupon_activo';
-
-// Lista de cupones disponibles. tipo: 'porcentaje' o 'monto' (pesos fijos)
-const CUPONES = [
-  { codigo: 'CYBER10',   titulo: 'Bienvenida cyber.',  tipo: 'porcentaje', valor: 10,  minimo: 0 },
-  { codigo: 'AHORRA200', titulo: 'Ahorro directo',     tipo: 'monto',      valor: 200, minimo: 1500 },
-  { codigo: 'PRO20',     titulo: 'Compra grande',      tipo: 'porcentaje', valor: 20,  minimo: 5000 },
-  { codigo: 'MEGA500',   titulo: 'Mega descuento',     tipo: 'monto',      valor: 500, minimo: 8000 }
-];
-
-function formatoMXN(n) {
-  return '$' + Number(n).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-
-// --- Cupón activo (se guarda en localStorage para que viaje entre páginas) ---
-function obtenerCuponActivo() {
-  try {
-    const codigo = localStorage.getItem(CLAVE_CUPON);
-    return CUPONES.find(c => c.codigo === codigo) || null;
-  } catch (e) {
-    return null;
-  }
-}
-
-function activarCupon(codigo) {
-  const cupon = CUPONES.find(c => c.codigo === codigo);
-  if (!cupon) return null;
-  try { localStorage.setItem(CLAVE_CUPON, cupon.codigo); } catch (e) { /* sin storage */ }
-  return cupon;
-}
-
-function quitarCupon() {
-  try { localStorage.removeItem(CLAVE_CUPON); } catch (e) { /* sin storage */ }
-}
-
-function calcularDescuento(cupon, subtotal) {
-  if (!cupon || subtotal < cupon.minimo) return 0;
-  const bruto = cupon.tipo === 'porcentaje' ? subtotal * cupon.valor / 100 : cupon.valor;
-  return Math.min(Math.round(bruto * 100) / 100, subtotal);
-}
-
-function setTexto(id, texto) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = texto;
-}
-
-/* restarPorPromo()
-   Toma el subtotal del carrito, le resta el descuento del cupón activo
-   y actualiza el resumen del carrito (subtotal, descuento, total).
-   Devuelve { subtotal, descuento, total }. */
-function restarPorPromo() {
-  const cupon = obtenerCuponActivo();
-  const items = (typeof carrito !== 'undefined' && Array.isArray(carrito)) ? carrito : [];
-  const subtotal = items.reduce((acc, i) => acc + i.precio * i.cant, 0);
-  const descuento = calcularDescuento(cupon, subtotal);
-
-  // El envío lo calcula el carrito; si no es un número (ej. "Gratis") cuenta como 0
-  const envioEl = document.getElementById('cart-shipping');
-  const envio = envioEl ? (parseFloat(envioEl.textContent.replace(/[^0-9.]/g, '')) || 0) : 0;
-  const total = subtotal - descuento + envio;
-
-  setTexto('cart-subtotal', formatoMXN(subtotal));
-  setTexto('cart-discount', '-' + formatoMXN(descuento));
-  setTexto('cart-total', total.toFixed(2));
-  setTexto('coupons-count', cupon ? 1 : 0);
-
-  const filaDescuento = document.getElementById('cart-discount-row');
-  if (filaDescuento) filaDescuento.hidden = descuento <= 0;
-
-  let mensaje = '';
-  if (cupon && items.length > 0) {
-    mensaje = descuento > 0
-      ? `Cupón ${cupon.codigo} aplicado: ahorras ${formatoMXN(descuento)}`
-      : `El cupón ${cupon.codigo} necesita una compra mínima de ${formatoMXN(cupon.minimo)}`;
-  }
-  setTexto('cart-coupon-status', mensaje);
-
-  return { subtotal, descuento, total };
-}
-
-// Cada vez que el carrito se actualiza, se vuelve a restar la promo
-if (typeof actualizarCarrito === 'function') {
-  const actualizarCarritoOriginal = actualizarCarrito;
-  window.actualizarCarrito = function () {
-    actualizarCarritoOriginal.apply(this, arguments);
-    restarPorPromo();
-  };
-}
-
-document.addEventListener('DOMContentLoaded', restarPorPromo);

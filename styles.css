@@ -684,9 +684,6 @@ aside button.cat-btn.active .cat-count {
   box-shadow: var(--sombra);
   perspective: 1000px;
   transition: transform 0.22s ease, box-shadow 0.22s ease;
-  animation: llegada 0.6s ease-out backwards;
-  animation-delay: calc(var(--i, 0) * 0.14s + 0.15s);
-  animation-play-state: running;
 }
 
 .product-card-inner {
@@ -695,20 +692,21 @@ aside button.cat-btn.active .cat-count {
   flex-direction: column;
   transform-style: preserve-3d;
   position: relative;
+}
+
+/* Permanece en su celda (sin salir de pantalla) hasta entrar al viewport */
+html.js-anim .product-card:not(.is-visible) {
+  opacity: 0;
+}
+
+.product-card.is-visible {
+  animation: llegada 0.6s ease-out backwards;
+  animation-delay: calc(var(--i, 0) * 0.14s + 0.1s);
+}
+
+.product-card.is-visible .product-card-inner {
   animation: voltear 0.38s ease-out backwards;
-  animation-delay: calc(var(--i, 0) * 0.14s + 0.72s);
-  animation-play-state: running;
-}
-
-/* Cuando app.js activa el IntersectionObserver, pausa hasta entrar en viewport */
-html.js-anim .product-card,
-html.js-anim .product-card-inner {
-  animation-play-state: paused;
-}
-
-html.js-anim .product-card.is-visible,
-html.js-anim .product-card.is-visible .product-card-inner {
-  animation-play-state: running;
+  animation-delay: calc(var(--i, 0) * 0.14s + 0.68s);
 }
 
 .product-card-front {

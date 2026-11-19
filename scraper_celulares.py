@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-"""
-Web scraper de celulares desde GSMArena.
-Genera un archivo productos.json con imágenes distintas por variante/color.
-"""
-
 import argparse
 import json
 import re
@@ -65,7 +59,7 @@ def obtener_html(session: requests.Session, url: str, espera: float = 0.8) -> Be
 
 
 def parsear_precio_mxn(texto_precio: str | None) -> float | None:
-    """Convierte cadenas como 'About 190 EUR' o '$ 1,439.00 / € 1,439.00' a MXN."""
+   
     if not texto_precio:
         return None
 

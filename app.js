@@ -663,6 +663,7 @@ function dibujarRuleta(canvas) {
     ctx.lineWidth = 2;
     ctx.stroke();
 
+    
     ctx.save();
     ctx.translate(cx, cy);
     ctx.rotate(start + slice / 2);
@@ -673,3 +674,97 @@ function dibujarRuleta(canvas) {
     ctx.restore();
   });
 }
+
+
+/* cupones.js — Cupones de promoción de cyber.*/
+
+const CLAVE_CUPON = 'cyber_cupon_activo';
+
+// Lista de cupones disponibles. tipo: 'porcentaje' o 'monto' (pesos fijos)
+const CUPONES = [
+  { codigo: 'CYBER10',   titulo: 'Bienvenida cyber.',  tipo: 'porcentaje', valor: 10,  minimo: 0 },
+  { codigo: 'AHORRA200', titulo: 'Ahorro directo',     tipo: 'monto',      valor: 200, minimo: 1500 },
+  { codigo: 'PRO20',     titulo: 'Compra grande',      tipo: 'porcentaje', valor: 20,  minimo: 5000 },
+  { codigo: 'MEGA500',   titulo: 'Mega descuento',     tipo: 'monto',      valor: 500, minimo: 8000 }
+];
+
+function formatoMXN(n) {
+  return '$' + Number(n).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+// --- Cupón activo (se guarda en localStorage para que viaje entre páginas) ---
+function obtenerCuponActivo() {
+  try {
+    const codigo = localStorage.getItem(CLAVE_CUPON);
+    return CUPONES.find(c => c.codigo === codigo) || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function activarCupon(codigo) {
+  const cupon = CUPONES.find(c => c.codigo === codigo);
+  if (!cupon) return null;
+  try { localStorage.setItem(CLAVE_CUPON, cupon.codigo); } catch (e) { /* sin storage */ }
+  return cupon;
+}
+
+function quitarCupon() {
+  try { localStorage.removeItem(CLAVE_CUPON); } catch (e) { /* sin storage */ }
+}
+
+function calcularDescuento(cupon, subtotal) {
+  if (!cupon || subtotal < cupon.minimo) return 0;
+  const bruto = cupon.tipo === 'porcentaje' ? subtotal * cupon.valor / 100 : cupon.valor;
+  return Math.min(Math.round(bruto * 100) / 100, subtotal);
+}
+
+function setTexto(id, texto) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = texto;
+}
+
+/* restarPorPromo()
+   Toma el subtotal del carrito, le resta el descuento del cupón activo
+   y actualiza el resumen del carrito (subtotal, descuento, total).
+   Devuelve { subtotal, descuento, total }. */
+function restarPorPromo() {
+  const cupon = obtenerCuponActivo();
+  const items = (typeof carrito !== 'undefined' && Array.isArray(carrito)) ? carrito : [];
+  const subtotal = items.reduce((acc, i) => acc + i.precio * i.cant, 0);
+  const descuento = calcularDescuento(cupon, subtotal);
+
+  // El envío lo calcula el carrito; si no es un número (ej. "Gratis") cuenta como 0
+  const envioEl = document.getElementById('cart-shipping');
+  const envio = envioEl ? (parseFloat(envioEl.textContent.replace(/[^0-9.]/g, '')) || 0) : 0;
+  const total = subtotal - descuento + envio;
+
+  setTexto('cart-subtotal', formatoMXN(subtotal));
+  setTexto('cart-discount', '-' + formatoMXN(descuento));
+  setTexto('cart-total', total.toFixed(2));
+  setTexto('coupons-count', cupon ? 1 : 0);
+
+  const filaDescuento = document.getElementById('cart-discount-row');
+  if (filaDescuento) filaDescuento.hidden = descuento <= 0;
+
+  let mensaje = '';
+  if (cupon && items.length > 0) {
+    mensaje = descuento > 0
+      ? `Cupón ${cupon.codigo} aplicado: ahorras ${formatoMXN(descuento)}`
+      : `El cupón ${cupon.codigo} necesita una compra mínima de ${formatoMXN(cupon.minimo)}`;
+  }
+  setTexto('cart-coupon-status', mensaje);
+
+  return { subtotal, descuento, total };
+}
+
+// Cada vez que el carrito se actualiza, se vuelve a restar la promo
+if (typeof actualizarCarrito === 'function') {
+  const actualizarCarritoOriginal = actualizarCarrito;
+  window.actualizarCarrito = function () {
+    actualizarCarritoOriginal.apply(this, arguments);
+    restarPorPromo();
+  };
+}
+
+document.addEventListener('DOMContentLoaded', restarPorPromo);

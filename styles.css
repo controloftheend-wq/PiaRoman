@@ -14,12 +14,11 @@
   --radio: 14px;
   --radio-sm: 10px;
   --sombra: 0 2px 10px rgba(0, 0, 0, 0.06);
-  --sombra-hover: 0 10px 24px rgba(37, 99, 235, 0.12);
+  --sombra-hover: 0 12px 26px rgba(37, 99, 235, 0.14);
   --fuente: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --ancho-max: 1280px;
 
-  /* Alias de compatibilidad para estilos inline en app.js */
   --muted: var(--color-texto-suave);
 }
 
@@ -52,7 +51,72 @@ select {
   font-family: inherit;
 }
 
-/* Utilidades conservadas de estilos.css */
+/* ===== KEYFRAMES DE ANIMACIÓN ===== */
+@keyframes llegada {
+  from {
+    opacity: 0;
+    transform: translateX(-100vw) rotate(-15deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotate(0);
+  }
+}
+
+@keyframes voltear {
+  from {
+    transform: rotateY(180deg);
+  }
+  to {
+    transform: rotateY(0);
+  }
+}
+
+@keyframes aparecerSuave {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomCarrusel {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes toastEntrada {
+  from {
+    opacity: 0;
+    transform: translateX(30px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes modalPop {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Utilidades base */
 .contenedor {
   max-width: var(--ancho-max);
   margin: 0 auto;
@@ -73,17 +137,11 @@ select {
   border-radius: 50%;
   border: 2px solid var(--color-borde);
   cursor: pointer;
+  transition: transform 0.15s ease;
 }
 
-@keyframes llegada {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.color-punto:hover {
+  transform: scale(1.15);
 }
 
 /* ===== HEADER & BUSCADOR ===== */
@@ -118,6 +176,11 @@ header {
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: translateY(-1px);
 }
 
 .logo-index {
@@ -185,6 +248,7 @@ header {
   z-index: 150;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
   overflow: hidden;
+  animation: aparecerSuave 0.2s ease-out;
 }
 
 .autocomplete-item {
@@ -194,7 +258,7 @@ header {
   padding: 10px 14px;
   border-bottom: 1px solid var(--color-borde);
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, padding-left 0.15s ease;
 }
 
 .autocomplete-item:last-child {
@@ -203,6 +267,7 @@ header {
 
 .autocomplete-item:hover {
   background: var(--color-fondo);
+  padding-left: 18px;
 }
 
 .autocomplete-item img {
@@ -250,8 +315,13 @@ header {
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
   white-space: nowrap;
+}
+
+.coupons-nav-btn:active,
+.cart-button:active {
+  transform: scale(0.96);
 }
 
 .coupons-nav-btn {
@@ -337,6 +407,7 @@ header {
   max-width: var(--ancho-max);
   margin: 24px auto 0;
   padding: 0 24px;
+  animation: aparecerSuave 0.5s ease-out;
 }
 
 .hero-frame {
@@ -422,6 +493,7 @@ header {
 
 .carousel-slide.active {
   display: block;
+  animation: zoomCarrusel 0.7s ease-out;
 }
 
 .slide-content {
@@ -463,6 +535,11 @@ header {
   font-weight: 700;
   z-index: 4;
   box-shadow: var(--sombra);
+  transition: transform 0.25s ease;
+}
+
+.hero-frame:hover .hero-arrow-box {
+  transform: translateX(4px);
 }
 
 /* ===== CATÁLOGO (SIDEBAR + TOOLBAR + GRID) ===== */
@@ -516,11 +593,12 @@ aside button.cat-btn {
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background 0.15s ease, transform 0.15s ease, color 0.15s ease;
 }
 
 aside button.cat-btn:hover {
   background: var(--color-fondo);
+  transform: translateX(3px);
 }
 
 aside button.cat-btn.active {
@@ -583,6 +661,7 @@ aside button.cat-btn.active .cat-count {
   font-size: 0.85rem;
   cursor: pointer;
   outline: none;
+  transition: border-color 0.2s ease;
 }
 
 .sort-select:focus {
@@ -595,22 +674,73 @@ aside button.cat-btn.active .cat-count {
   gap: 20px;
 }
 
+/* ===== TARJETAS DE PRODUCTO (ANIMACIÓN LLEGADA + VOLTEO 3D DEL VIDEO) ===== */
 .product-card {
+  display: flex;
+  flex-direction: column;
   background: var(--color-superficie);
   border: 1px solid var(--color-borde);
   border-radius: var(--radio);
   box-shadow: var(--sombra);
-  padding: 16px;
+  perspective: 1000px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  animation: llegada 0.6s ease-out backwards;
+  animation-delay: calc(var(--i, 0) * 0.14s + 0.15s);
+  animation-play-state: running;
+}
+
+.product-card-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  transform-style: preserve-3d;
+  position: relative;
+  animation: voltear 0.38s ease-out backwards;
+  animation-delay: calc(var(--i, 0) * 0.14s + 0.72s);
+  animation-play-state: running;
+}
+
+/* Cuando app.js activa el IntersectionObserver, pausa hasta entrar en viewport */
+html.js-anim .product-card,
+html.js-anim .product-card-inner {
+  animation-play-state: paused;
+}
+
+html.js-anim .product-card.is-visible,
+html.js-anim .product-card.is-visible .product-card-inner {
+  animation-play-state: running;
+}
+
+.product-card-front {
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 12px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  animation: llegada 0.45s ease-out both;
+  padding: 16px;
+  backface-visibility: hidden;
+  border-radius: var(--radio);
+  background: var(--color-superficie);
+}
+
+.product-card-back {
+  background: var(--color-reverso);
+  border-radius: var(--radio);
+  backface-visibility: hidden;
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}
+
+/* Compatibilidad si la tarjeta aún no tiene .product-card-inner */
+.product-card:not(:has(.product-card-inner)) {
+  padding: 16px;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .product-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
   box-shadow: var(--sombra-hover);
 }
 
@@ -632,11 +762,11 @@ aside button.cat-btn.active .cat-count {
   max-width: 82%;
   max-height: 82%;
   object-fit: contain;
-  transition: transform 0.25s ease;
+  transition: transform 0.28s ease;
 }
 
 .product-card:hover .product-img {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 .product-badges {
@@ -670,9 +800,11 @@ aside button.cat-btn.active .cat-count {
   cursor: pointer;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   min-height: 2.7em;
+  transition: color 0.15s ease;
 }
 
 .product-title:hover {
@@ -708,11 +840,15 @@ aside button.cat-btn.active .cat-count {
   font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, transform 0.12s ease;
 }
 
 .btn-add:hover {
   background: var(--color-principal-oscuro);
+}
+
+.btn-add:active {
+  transform: scale(0.97);
 }
 
 .empty-state {
@@ -724,6 +860,7 @@ aside button.cat-btn.active .cat-count {
   text-align: center;
   font-size: 0.95rem;
   color: var(--color-texto-suave);
+  animation: aparecerSuave 0.3s ease-out;
 }
 
 /* ===== VISTAS Y DETALLE BUY BOX ===== */
@@ -743,6 +880,7 @@ aside button.cat-btn.active .cat-count {
   border: 1px solid var(--color-borde);
   border-radius: var(--radio);
   box-shadow: var(--sombra);
+  animation: aparecerSuave 0.35s ease-out;
 }
 
 .detail-top-bar {
@@ -771,6 +909,7 @@ aside button.cat-btn.active .cat-count {
 .btn-back:hover {
   background: var(--color-principal);
   color: #fff;
+  transform: translateX(-2px);
 }
 
 .breadcrumbs {
@@ -807,12 +946,18 @@ aside button.cat-btn.active .cat-count {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .detail-img-main {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.detail-img-frame:hover .detail-img-main {
+  transform: scale(1.05);
 }
 
 .detail-category {
@@ -898,7 +1043,11 @@ aside button.cat-btn.active .cat-count {
   border-radius: var(--radio-sm);
   cursor: pointer;
   border: 2px solid var(--color-borde);
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.design-thumb:hover {
+  transform: translateY(-2px);
 }
 
 .design-thumb.active {
@@ -972,6 +1121,7 @@ aside button.cat-btn.active .cat-count {
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
+  transition: background 0.15s ease;
 }
 
 .qty-control button:hover {
@@ -1041,7 +1191,7 @@ aside button.cat-btn.active .cat-count {
   background: var(--color-superficie);
   border-left: 1px solid var(--color-borde);
   box-shadow: -8px 0 30px rgba(0, 0, 0, 0.12);
-  transition: right 0.28s ease;
+  transition: right 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -1075,12 +1225,14 @@ aside button.cat-btn.active .cat-count {
   color: var(--color-texto);
   font-size: 15px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .close-btn:hover {
   background: var(--color-principal);
   border-color: var(--color-principal);
   color: #fff;
+  transform: rotate(90deg);
 }
 
 .cart-items {
@@ -1094,6 +1246,7 @@ aside button.cat-btn.active .cat-count {
   padding: 12px 0;
   border-bottom: 1px solid var(--color-borde);
   align-items: center;
+  animation: aparecerSuave 0.25s ease-out;
 }
 
 .cart-item img {
@@ -1136,6 +1289,11 @@ aside button.cat-btn.active .cat-count {
   background: var(--color-fondo);
   font-weight: 700;
   cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.cart-qty-btn:hover {
+  background: var(--color-borde);
 }
 
 .cart-remove-btn {
@@ -1199,11 +1357,15 @@ aside button.cat-btn.active .cat-count {
   font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, transform 0.12s ease;
 }
 
 .checkout-btn:hover {
   background: var(--color-principal-oscuro);
+}
+
+.checkout-btn:active {
+  transform: scale(0.98);
 }
 
 /* ===== TOAST ===== */
@@ -1226,6 +1388,7 @@ aside button.cat-btn.active .cat-count {
   font-size: 0.88rem;
   font-weight: 500;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  animation: toastEntrada 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ===== PÁGINAS INTERNAS ===== */
@@ -1233,6 +1396,7 @@ aside button.cat-btn.active .cat-count {
   max-width: var(--ancho-max);
   margin: 24px auto 0;
   padding: 0 24px;
+  animation: aparecerSuave 0.4s ease-out;
 }
 
 .page-hero {
@@ -1298,6 +1462,13 @@ aside button.cat-btn.active .cat-count {
   flex-direction: column;
   justify-content: space-between;
   gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: aparecerSuave 0.45s ease-out both;
+}
+
+.info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sombra-hover);
 }
 
 .info-card .tag {
@@ -1334,11 +1505,12 @@ aside button.cat-btn.active .cat-count {
   border-radius: var(--radio-sm);
   padding: 10px 18px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .btn-cyber:hover {
   background: var(--color-principal-oscuro);
+  transform: translateY(-1px);
 }
 
 /* ===== CUPONES & RULETA ===== */
@@ -1377,10 +1549,12 @@ aside button.cat-btn.active .cat-count {
   font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .open-wheel-btn:hover {
   background: var(--color-principal-oscuro);
+  transform: translateY(-1px);
 }
 
 .coupons-grid {
@@ -1398,6 +1572,13 @@ aside button.cat-btn.active .cat-count {
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: aparecerSuave 0.4s ease-out both;
+}
+
+.coupon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra);
 }
 
 .coupon-card.won-coupon {
@@ -1498,6 +1679,7 @@ aside button.cat-btn.active .cat-count {
   padding: 28px 22px;
   text-align: center;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: modalPop 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .temu-close-btn {
@@ -1596,6 +1778,7 @@ aside button.cat-btn.active .cat-count {
 
 .temu-result-box.active {
   display: block;
+  animation: aparecerSuave 0.3s ease-out;
 }
 
 .result-prize {
@@ -1745,5 +1928,15 @@ aside button.cat-btn.active .cat-count {
 
   .nav-meta {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

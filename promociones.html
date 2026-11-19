@@ -3,32 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>cyber. — Catálogo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>cyber. — Promociones y Cupones</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="promos.css">
 </head>
 <body>
   <div class="site-header">
     <header>
-      <div class="logo" onclick="mostrarPaginaInicio()">
+      <a href="index.html" class="logo">
         <span class="logo-index">+1</span> cyber.
-      </div>
+      </a>
 
       <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Buscar consolas, periféricos, marcas..." autocomplete="off">
+        <input type="text" id="search-input" class="search-box" placeholder="Buscar celulares, marcas..." autocomplete="off">
         <button type="button" id="search-clear-btn" class="search-clear-btn" aria-label="Limpiar búsqueda" hidden>✕</button>
         <div id="search-autocomplete" class="search-autocomplete" hidden></div>
       </div>
 
       <div class="header-actions">
-        <a href="promociones.html" class="coupons-nav-btn">Cupones (<span id="coupons-count">0</span>)</a>
-        <button class="cart-button" onclick="toggleCarrito()">Carrito (<span id="cart-count">0</span>)</button>
+        <button type="button" class="coupons-nav-btn" onclick="abrirRuleta()">Ruleta (<span id="coupons-count">3</span>)</button>
+        <button type="button" class="cart-button" onclick="toggleCarrito()">Carrito (<span id="cart-count">0</span>)</button>
       </div>
     </header>
 
     <nav class="top-nav" aria-label="Navegación principal">
-     <div class="top-nav-links">
+      <div class="top-nav-links">
         <a href="promociones.html" class="nav-link active">Promociones</a>
         <a href="acerca.html" class="nav-link">Acerca de</a>
         <a href="index.html" class="nav-link">Catálogo</a>
@@ -39,156 +37,76 @@
     </nav>
   </div>
 
-  <div id="home-view" class="view active">
-    <section class="editorial-hero">
-      <div class="hero-frame">
-        <div class="hero-left">
-          <div class="hero-kicker">X/LAB — HARDWARE DE CREACIÓN</div>
-          <div class="hero-brand-display">cyber<span>.</span></div>
-          <div class="hero-bottom-row">
-            <div class="hero-index-num">001</div>
-            <p class="hero-copy">
-              Equipamiento gaming de precisión, periféricos mecánicos y consolas de nueva generación.
-            </p>
-          </div>
-        </div>
-
-        <div class="carousel-container">
-          <div class="hero-arrow-box" aria-hidden="true">→</div>
-          <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200');">
-            <div class="slide-content">
-              <div>
-                <div class="slide-title">GEAR GAMING NEXT-GEN</div>
-                <p>Edición Studio / Tecnología RGB de alto rendimiento</p>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200');">
-            <div class="slide-content">
-              <div>
-                <div class="slide-title">NUEVOS LANZAMIENTOS</div>
-                <p>Consolas, mandos y teclados mecánicos para tu setup</p>
-              </div>
-            </div>
-          </div>
-        </div>
+  <main class="page-container">
+    <section class="page-hero">
+      <div>
+        <div class="page-hero-kicker">X/LAB — BENEFICIOS &amp; DESCUENTOS</div>
+        <h1>Cupones y Promociones.</h1>
+        <p>Activa un cupón para aplicarlo automáticamente en tu carrito o gira la ruleta para desbloquear premios exclusivos.</p>
       </div>
+      <div class="page-hero-index">002</div>
     </section>
 
-    <div class="main-container">
-      <aside>
-        <div class="filter-group">
-          <h3>Categorías</h3>
-          <div id="category-filters">
-            <button class="cat-btn active" onclick="filtrarCategoria('Todas', this)">
-              <span>Todas</span><span class="cat-count" data-cat="Todas">0</span>
-            </button>
-            <button class="cat-btn" onclick="filtrarCategoria('Consolas', this)">
-              <span>Consolas</span><span class="cat-count" data-cat="Consolas">0</span>
-            </button>
-            <button class="cat-btn" onclick="filtrarCategoria('Periféricos RGB', this)">
-              <span>Periféricos RGB</span><span class="cat-count" data-cat="Periféricos RGB">0</span>
-            </button>
-            <button class="cat-btn" onclick="filtrarCategoria('Sillas & Setup', this)">
-              <span>Sillas &amp; Setup</span><span class="cat-count" data-cat="Sillas & Setup">0</span>
-            </button>
-            <button class="cat-btn" onclick="filtrarCategoria('Componentes', this)">
-              <span>Componentes</span><span class="cat-count" data-cat="Componentes">0</span>
-            </button>
-          </div>
+    <!-- Sección funcional de cupones -->
+    <section id="coupons-section" class="coupons-section">
+      <div class="coupons-section-header">
+        <div>
+          <h2>Tus Cupones Disponibles</h2>
+          <p>Selecciona un cupón para activarlo en el carrito y en el detalle de cada producto</p>
         </div>
-
-        <div class="filter-group">
-          <h3>Rango de Precio</h3>
-          <div id="price-filters">
-            <button class="cat-btn active" onclick="filtrarPrecio('1000-5000', this)">Todos las ofertas</button>
-  
-          </div>
-        </div>
-      </aside>
-
-      <section class="catalog-content">
-        <div class="catalog-toolbar">
-          <span id="results-counter" class="results-counter">Cargando productos...</span>
-          <div class="sort-wrapper">
-            <label for="sort-select">Ordenar:</label>
-            <select id="sort-select" class="sort-select" onchange="cambiarOrden(this.value)">
-              <option value="relevance">Relevancia</option>
-              <option value="price-asc">Menor precio</option>
-              <option value="price-desc">Mayor precio</option>
-            </select>
-          </div>
-        </div>
-
-        <main class="products-grid" id="products-container"></main>
-      </section>
-    </div>
-  </div>
-
-  <div id="product-detail-view" class="view">
-    <div class="detail-container">
-      <div class="detail-top-bar">
-        <button class="btn-back" onclick="mostrarPaginaInicio()">← Volver al Catálogo</button>
-        <nav id="detail-breadcrumbs" class="breadcrumbs" aria-label="Ruta de navegación"></nav>
+        <button type="button" class="open-wheel-btn" onclick="abrirRuleta()">Girar Ruleta de Premios</button>
       </div>
 
-      <div class="detail-grid-3">
-        <!-- Columna 1: Galería -->
-        <div class="detail-gallery">
-          <div class="detail-img-frame">
-            <img id="detail-img" class="detail-img-main" src="" alt="">
-          </div>
-          <div class="design-section">
-            <div class="design-title">Edición / Variante: <span id="selected-design-name"></span></div>
-            <div id="detail-designs" class="design-list"></div>
-          </div>
+      <div id="coupons-container" class="coupons-grid"></div>
+    </section>
+
+    <!-- Ofertas relámpago de celulares -->
+    <section class="coupons-section">
+      <div class="coupons-section-header">
+        <div>
+          <h2>Ofertas Destacadas</h2>
+          <p id="results-counter">Cargando ofertas...</p>
         </div>
-
-        <!-- Columna 2: Información -->
-        <div class="detail-info">
-          <div id="detail-category" class="detail-category"></div>
-          <h1 id="detail-title" class="detail-title"></h1>
-          <div class="detail-meta-tags">
-            <span class="meta-pill">GARANTÍA OFICIAL 12 MESES</span>
-            <span class="meta-pill">DISPONIBLE EN STOCK</span>
-          </div>
-          <div class="detail-specs-box">
-            <h3>Descripción del producto</h3>
-            <p id="detail-desc" class="detail-desc"></p>
-          </div>
+        <div class="sort-wrapper">
+          <label for="sort-select">Ordenar:</label>
+          <select id="sort-select" class="sort-select" onchange="cambiarOrden(this.value)">
+            <option value="relevance">Menor precio</option>
+            <option value="price-desc">Mayor precio</option>
+          </select>
         </div>
-
-        <!-- Columna 3: Buy Box (Estilo Amazon / Mercado Libre) -->
-        <aside class="buy-box">
-          <div id="buy-box-price" class="detail-price"></div>
-          <div id="buy-box-discount" class="buy-box-discount" hidden></div>
-          <div id="buy-box-shipping" class="buy-box-shipping"></div>
-
-          <div class="buy-box-pickup">
-            Retiro gratis disponible en <a href="sucursales.html">nuestras sucursales</a>.
-          </div>
-
-          <div class="qty-row">
-            <span>Cantidad</span>
-            <div class="qty-control">
-              <button type="button" onclick="cambiarCantidadDetalle(-1)">−</button>
-              <span id="detail-qty">1</span>
-              <button type="button" onclick="cambiarCantidadDetalle(1)">+</button>
-            </div>
-          </div>
-
-          <button id="detail-add-btn" class="checkout-btn">Agregar al Carrito</button>
-          <button type="button" class="buy-now-btn" onclick="comprarAhoraDetalle()">Comprar Ahora</button>
-        </aside>
       </div>
 
-      <section class="related-section" id="related-section" hidden>
-        <div class="related-header">
-          <h2>También te puede interesar</h2>
-          <span>Misma categoría</span>
+      <div class="products-grid" id="products-container"></div>
+    </section>
+  </main>
+
+  <!-- Modal de Ruleta que aparece al inicio -->
+  <div id="temu-wheel-overlay" role="dialog" aria-modal="true" aria-labelledby="wheel-title">
+    <div class="temu-modal">
+      <canvas id="confetti-canvas"></canvas>
+      <button type="button" id="close-wheel-btn" class="temu-close-btn" aria-label="Cerrar ruleta">✕</button>
+
+      <span class="temu-badge">RULETA DE CUPONES</span>
+      <h2 id="wheel-title">¡Gira y gana un cupón!</h2>
+      <p class="temu-subtitle">El premio que ganes se agregará directo a tu sección de cupones</p>
+
+      <div class="wheel-wrapper">
+        <div class="wheel-pointer" aria-hidden="true"></div>
+        <canvas id="temu-wheel-canvas" width="280" height="280"></canvas>
+        <button type="button" id="center-spin-btn" class="wheel-center-btn">GIRAR</button>
+      </div>
+
+      <button type="button" id="main-spin-btn" class="temu-cta-btn">Girar Ruleta Gratis</button>
+
+      <div id="result-box" class="temu-result-box">
+        <div style="font-size: 0.85rem; color: var(--color-texto-suave);">¡Felicidades! Desbloqueaste:</div>
+        <div id="result-prize-text" class="result-prize"></div>
+        <div class="coupon-code-row">
+          <strong id="result-coupon-code"></strong>
+          <button type="button" id="copy-coupon-btn" class="copy-code-btn">Copiar código</button>
         </div>
-        <div id="related-products-grid" class="related-grid"></div>
-      </section>
+        <button type="button" class="checkout-btn" onclick="cerrarRuletaEIrACupones()">Ver y usar en Cupones</button>
+      </div>
     </div>
   </div>
 
@@ -196,7 +114,7 @@
   <div class="cart-drawer" id="cart-drawer">
     <div class="cart-header">
       <h2>TU CARRITO</h2>
-      <button class="close-btn" onclick="toggleCarrito()">✕</button>
+      <button type="button" class="close-btn" onclick="toggleCarrito()">✕</button>
     </div>
     <div class="cart-items" id="cart-items-container"></div>
     <div class="cart-footer">
@@ -207,7 +125,7 @@
         <div class="summary-row"><span>Envío</span><span id="cart-shipping">$0.00</span></div>
         <div class="summary-row total"><span>Total</span><span>$<span id="cart-total">0.00</span></span></div>
       </div>
-      <button class="checkout-btn" onclick="vaciarCarrito()">Finalizar Compra</button>
+      <button type="button" class="checkout-btn" onclick="vaciarCarrito()">Finalizar Compra</button>
     </div>
   </div>
 
@@ -242,8 +160,7 @@
 
   <script src="app.js"></script>
   <script>
-    /* Solo promociones: 10 celulares más baratos con precio original (rojo) y precio con descuento */
-    const DESCUENTO_PROMO = 20; // % de descuento, cámbialo si quieres otro
+    const DESCUENTO_PROMO = 20;
 
     function renderizarCatalogo() {
       const container = document.getElementById('products-container');
@@ -254,35 +171,35 @@
         .filter(p => p.categoria === 'Celulares')
         .sort((a, b) => a.precio - b.precio)
         .slice(0, 10)
-        .filter(p => (categoriaActual === 'Todas' || p.categoria === categoriaActual) &&
-          (!textoBusqueda || p.nombre.toLowerCase().includes(textoBusqueda) ||
-           (p.descripcion || '').toLowerCase().includes(textoBusqueda)));
+        .filter(p => !textoBusqueda || p.nombre.toLowerCase().includes(textoBusqueda) ||
+          (p.descripcion || '').toLowerCase().includes(textoBusqueda));
+
       if (ordenActual === 'price-desc') lista.reverse();
 
-      if (counter) counter.textContent = `Mostrando ${lista.length} de 10 ofertas`;
+      if (counter) counter.textContent = `Mostrando ${lista.length} ofertas activas con ${DESCUENTO_PROMO}% de descuento`;
       if (lista.length === 0) {
-        container.innerHTML = '<div class="empty-state">No se encontraron productos con los filtros actuales.</div>';
+        container.innerHTML = '<div class="empty-state">No se encontraron ofertas con esa búsqueda.</div>';
         return;
       }
 
-      container.innerHTML = lista.map(p => {
+      container.innerHTML = lista.map((p, idx) => {
         const actual = p.precio * (1 - DESCUENTO_PROMO / 100);
         return `
-        <article class="product-card">
+        <article class="product-card" style="--i: ${idx};">
           <div>
-            <div class="product-img-wrap" onclick="verDetalle(${p.id})">
+            <div class="product-img-wrap" onclick="window.location.href='index.html'">
               <img class="product-img" src="${getImagenProducto(p)}" alt="${p.nombre}" loading="lazy">
             </div>
             <div class="product-badges">
-              <span class="product-cat-label">${p.categoria}</span>
-              <span class="free-shipping-tag">ENVÍO GRATIS</span>
+              <span class="product-cat-label">${p.marca || p.categoria}</span>
+              <span class="free-shipping-tag">-${DESCUENTO_PROMO}% PROMO</span>
             </div>
-            <h3 class="product-title" onclick="verDetalle(${p.id})">${p.nombre}</h3>
+            <h3 class="product-title" onclick="window.location.href='index.html'">${p.nombre}</h3>
           </div>
           <div>
-            <div class="promo-original">Precio original: $${formatMoney(p.precio)}</div>
-            <div class="product-price">Total: $${formatMoney(actual)}</div>
-            <button class="btn-add" onclick="agregarRapido(${p.id})">Agregar al carrito</button>
+            <div class="promo-original">Antes: $${formatMoney(p.precio)}</div>
+            <div class="product-price">Ahora: $${formatMoney(actual)}</div>
+            <button type="button" class="btn-add" onclick="agregarRapido(${p.id})">Agregar al carrito</button>
           </div>
         </article>`;
       }).join('');

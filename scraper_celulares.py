@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Web scraper de celulares desde GSMArena.
-Genera un archivo productos.json compatible con el catálogo del proyecto.
+Genera un archivo productos.json con imágenes distintas por variante/color.
 """
 
 import argparse
@@ -27,7 +27,6 @@ MARCAS = [
 
 PALABRAS_EXCLUIDAS = ("tab", "ipad", "pad", "watch", "band", "buds", "pixel book")
 
-# Tasas aproximadas a MXN para normalizar el precio numérico
 TASAS_A_MXN = {
     "MXN": 1.0,
     "USD": 20.0,
@@ -98,13 +97,61 @@ def extraer_spec(soup: BeautifulSoup, spec_name: str) -> str:
     return re.sub(r"\s+", " ", el.get_text(" ", strip=True)).strip()
 
 
-def construir_disenos(colors_text: str, imagen: str) -> list[dict[str, str]]:
-    """Construye la lista de diseños compatible con productos.json."""
+def obtener_imagenes_galeria(
+    session: requests.Session,
+    detalle: BeautifulSoup,
+    imagen_principal: str,
+) -> list[str]:
+    """Obtiene las fotos oficiales de distintos colores desde la página -pictures-."""
+    imagenes: list[str] = []
+    link_fotos = detalle.select_one('.specs-photo-main a[href*="-pictures-"], a[href*="-pictures-"]')
+
+    if link_fotos and link_fotos.get("href"):
+        url_fotos = urljoin(BASE_URL, link_fotos["href"])
+        soup_fotos = obtener_html(session, url_fotos, espera=0.5)
+        if soup_fotos:
+            contenedor = soup_fotos.select_one("#pictures-list")
+            if contenedor:
+                encabezados_vistos = 0
+                for nodo in contenedor.find_all(["h2", "img"]):
+                    if nodo.name == "h2":
+                        encabezados_vistos += 1
+                        # Evita mezclar muestras de cámara que aparecen en secciones posteriores
+                        if encabezados_vistos > 1:
+                            break
+                        continue
+
+                    src = nodo.get("data-src") or nodo.get("src") or ""
+                    if not src or src.startswith("data:"):
+                        continue
+
+                    url_img = urljoin(BASE_URL, src)
+                    if "/vv/pics/" in url_img and url_img not in imagenes:
+                        imagenes.append(url_img)
+
+    if not imagenes and imagen_principal:
+        imagenes.append(imagen_principal)
+
+    return imagenes
+
+
+def construir_disenos(colors_text: str, imagenes: list[str]) -> list[dict[str, str]]:
+    """Asigna una imagen distinta a cada edición/color disponible."""
+    if not imagenes:
+        return [{"nombre": "Edición Standard", "imagen": ""}]
+
     if colors_text:
         colores = [c.strip() for c in colors_text.split(",") if c.strip()][:3]
         if colores:
-            return [{"nombre": f"Edición {color}", "imagen": imagen} for color in colores]
-    return [{"nombre": "Edición Standard", "imagen": imagen}]
+            return [
+                {
+                    "nombre": f"Edición {color}",
+                    "imagen": imagenes[idx % len(imagenes)],
+                }
+                for idx, color in enumerate(colores)
+            ]
+
+    return [{"nombre": "Edición Standard", "imagen": imagenes[0]}]
 
 
 def scrape_marca(
@@ -152,7 +199,6 @@ def scrape_marca(
         precio_raw = extraer_spec(detalle, "price")
         precio_mxn = parsear_precio_mxn(precio_raw)
         if precio_mxn is None:
-            # Si aún no tiene precio publicado, probamos el siguiente modelo
             continue
 
         vistas.add(url_detalle)
@@ -165,7 +211,8 @@ def scrape_marca(
         colores = extraer_spec(detalle, "colors")
 
         img_detalle = detalle.select_one(".specs-photo-main img")
-        imagen = (img_detalle.get("src") if img_detalle else "") or imagen_lista
+        imagen_principal = (img_detalle.get("src") if img_detalle else "") or imagen_lista
+        imagenes_galeria = obtener_imagenes_galeria(session, detalle, imagen_principal)
 
         partes_desc = []
         if pantalla:
@@ -185,6 +232,8 @@ def scrape_marca(
             else (resumen_lista or f"Smartphone {nombre_completo} de {marca}.")
         )
 
+        disenos = construir_disenos(colores, imagenes_galeria)
+
         resultados.append(
             {
                 "nombre": nombre_completo,
@@ -194,10 +243,10 @@ def scrape_marca(
                 "precio": precio_mxn,
                 "precio_referencia": precio_raw,
                 "url": url_detalle,
-                "disenos": construir_disenos(colores, imagen),
+                "disenos": disenos,
             }
         )
-        print(f"  + {nombre_completo} (${precio_mxn:,.2f} MXN)")
+        print(f"  + {nombre_completo} (${precio_mxn:,.2f} MXN | {len(imagenes_galeria)} fotos)")
 
     return resultados
 
@@ -236,7 +285,6 @@ def main() -> None:
             productos.extend(items)
             restantes_marcas -= 1
 
-        # Segunda pasada si alguna marca tuvo menos modelos con precio publicado
         if len(productos) < total:
             for marca, url_marca in MARCAS:
                 faltan = total - len(productos)
@@ -248,10 +296,8 @@ def main() -> None:
     productos = productos[:total]
 
     for idx, producto in enumerate(productos, start=1):
-        producto["id"] = idx
-        # Reordenar llaves para mantener "id" al inicio igual que en productos.json
         productos[idx - 1] = {
-            "id": producto["id"],
+            "id": idx,
             "nombre": producto["nombre"],
             "marca": producto["marca"],
             "descripcion": producto["descripcion"],
